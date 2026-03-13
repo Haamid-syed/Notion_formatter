@@ -2,3 +2,7 @@ flask
 notion-client
 python-dotenv
 requests
+Flask-Limiter
+google-genai
+mistune
+tenacity

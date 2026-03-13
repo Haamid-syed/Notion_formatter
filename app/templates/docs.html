@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="gs-reveal" style="flex: 1;">
+    <h2 style="margin-bottom: 2rem; font-size: clamp(2rem, 5vw, 4rem);">SYSTEM <br> DOCS</h2>
+    
+    <div class="block-card" style="margin-bottom: 2rem;">
+        <h3 style="margin-bottom: 1rem;">1. AUTHENTICATION</h3>
+        <p>
+            Connect your workspace using the standard Notion OAuth flow. You must selectively grant access to specific pages—the system does not request full workspace clearance. Only selected index pages and their children are visible.
+        </p>
+    </div>
+
+    <div class="block-card" style="margin-bottom: 2rem;">
+        <h3 style="margin-bottom: 1rem;">2. NON-DESTRUCTIVE EDITING</h3>
+        <p>
+            When a formatting trigger is invoked, the AI engine analyzes the content payload. It renders a new native Notion layout and appends it. The system tags its own generated elements and performs idempotent checks—meaning it will automatically delete its own previous formatting runs if you run it again, ensuring no duplication.
+        </p>
+    </div>
+
+    <div class="block-card" style="margin-bottom: 2rem;">
+        <h3 style="margin-bottom: 1rem;">3. SYNTAX EXTRACTION</h3>
+        <p>
+            If raw code dumps exist in the page, the system automatically infers the language runtime, segregates the code, and assigns it to a <code>code_block</code> property with native Notion syntax highlighting configured.
+        </p>
+    </div>
+</div>
+{% endblock %}

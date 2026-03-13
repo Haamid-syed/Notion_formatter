@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORM // AI Notion Refiner</title>
+    
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
+    
+    <!-- GSAP for advanced animations -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+</head>
+<body>
+    <div class="noise-overlay"></div>
+    
+    <header class="navbar gs-reveal">
+        <a href="/" class="logo">
+            <span class="logo-stamp">N</span>
+            Formatter
+        </a>
+        
+        <nav style="display: flex; gap: 2rem; align-items: center;">
+            <a href="/about" style="text-decoration: none; color: var(--ink-primary); font-weight: 700; font-family: var(--font-mono); font-size: 0.875rem;">ABOUT</a>
+            <a href="/docs" style="text-decoration: none; color: var(--ink-primary); font-weight: 700; font-family: var(--font-mono); font-size: 0.875rem;">DOCS</a>
+            
+            <div class="nav-actions" style="margin-left: 1rem;">
+                {% if session.get('notion_access_token') %}
+                    <a href="/logout" class="btn" style="padding: 0.4rem 1rem; font-size: 0.875rem;">DISCONNECT</a>
+                {% else %}
+                    <a href="/login" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.875rem;">AUTHENTICATE</a>
+                {% endif %}
+            </div>
+        </nav>
+    </header>
+
+    <div class="app-container">
+        <main style="flex: 1; display: flex; flex-direction: column;">
+            {% if error %}
+            <div class="block-card gs-reveal" style="background: var(--ink-primary); color: var(--bg-primary); margin-bottom: 2rem;">
+                <h3 style="margin-bottom: 0.5rem; color: #ff5252;">ERROR</h3>
+                <p style="font-family: var(--font-mono); font-size: 1rem;">{{ error }}</p>
+            </div>
+            {% endif %}
+            
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+
+    <footer class="footer gs-reveal">
+        <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
+            <span>SYS.REQ: AI REFINEMENT ENGINE</span>
+            <span style="color: var(--ink-muted);">//</span>
+            <span>NOTION FORMATTER // V2.0</span>
+        </div>
+        <div style="display: flex; gap: 1.5rem;">
+            <a href="https://github.com" target="_blank" style="color: var(--ink-primary); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color var(--transition-snap);" onmouseover="this.style.borderColor='var(--ink-primary)'" onmouseout="this.style.borderColor='transparent'">GITHUB</a>
+            <a href="https://x.com" target="_blank" style="color: var(--ink-primary); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color var(--transition-snap);" onmouseover="this.style.borderColor='var(--ink-primary)'" onmouseout="this.style.borderColor='transparent'">X (TWITTER)</a>
+        </div>
+    </footer>
+
+    <script>
+        // Force scroll to top on reload
+        if ('scrollRestoration' in history) {
+            history.scrollRestoration = 'manual';
+        }
+        window.scrollTo(0, 0);
+
+        // Global GSAP Reveal
+        document.addEventListener("DOMContentLoaded", () => {
+            gsap.fromTo(".gs-reveal", 
+                { y: 50, opacity: 0 }, 
+                { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" }
+            );
+        });
+    </script>
+</body>
+</html>

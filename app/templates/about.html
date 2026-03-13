@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="gs-reveal" style="flex: 1;">
+    <h2 style="margin-bottom: 2rem; font-size: clamp(2rem, 5vw, 4rem);">ABOUT <br> THE PROJECT</h2>
+    
+    <div class="block-card" style="margin-bottom: 3rem;">
+        <h3 style="margin-bottom: 1rem;">PURPOSE // INTENT</h3>
+        <p style="margin-bottom: 1.5rem;">
+            Notion Formatter was built with one goal: to separate the cognitive load of <strong>writing</strong> from the tedium of <strong>formatting</strong>. By allowing humans to dump raw streams of consciousness into Notion, we leverage AI models to act as the editor—restructuring, formatting, and presenting the ideas in native Notion blocks without altering the core assertions.
+        </p>
+        <p>
+            It’s not just an API call; it’s an automated editorial pipeline built on a Brutalist architectural philosophy. Function over decoration. Structure over style.
+        </p>
+    </div>
+
+    <div class="block-card" style="background: var(--ink-primary); color: var(--bg-primary);">
+        <h3 style="margin-bottom: 1rem; color: var(--bg-primary);">TECHNICAL // STACK</h3>
+        <ul style="list-style-type: square; margin-left: 2rem; font-family: var(--font-mono); font-size: 1rem; line-height: 2;">
+            <li>Python / Flask Runtime Core</li>
+            <li>Notion REST API Integration</li>
+            <li>Google Gemini 2.5 Flash Parsing Engine</li>
+            <li>Custom AST-to-Notion block compiler</li>
+            <li>HTML/CSS Vanilla Frontend with GSAP Motion</li>
+            <li>Idempotent block manipulation</li>
+        </ul>
+    </div>
+</div>
+{% endblock %}

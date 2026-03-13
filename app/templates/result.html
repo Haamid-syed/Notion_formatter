@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="gs-reveal" style="display: flex; flex-direction: column; align-items: stretch; justify-content: center; flex: 1; padding: 2rem 0;">
+    
+    {% if success %}
+        <div class="block-card" style="background: var(--ink-primary); color: var(--bg-primary); padding: 6rem 4rem; text-align: center;">
+            <h1 style="font-size: clamp(3rem, 12vw, 8rem); color: var(--bg-primary);">SUCCESS</h1>
+            <p style="margin-top: 2rem; border-top: 4px solid var(--bg-primary); padding-top: 2rem; font-size: 1.5rem; text-transform: uppercase;">
+                Document restructured. LLM injection complete.
+            </p>
+        </div>
+    {% else %}
+        <div class="block-card" style="background: transparent; border-color: #ff5252; color: #ff5252; padding: 6rem 4rem; text-align: center;">
+            <h1 style="font-size: clamp(3rem, 12vw, 8rem); color: #ff5252;">FAILURE</h1>
+            <p style="margin-top: 2rem; border-top: 4px solid #ff5252; padding-top: 2rem; font-size: 1.5rem; text-transform: uppercase; color: var(--ink-primary);">
+                Process terminated organically. Check server logs.
+            </p>
+        </div>
+    {% endif %}
+    
+    <div style="margin-top: 4rem; text-align: center;">
+        <a href="/" class="btn btn-primary" style="font-size: 1.25rem;">RETURN TO INDEX</a>
+    </div>
+    
+</div>
+{% endblock %}

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div style="display: flex; flex-direction: column; justify-content: center; flex: 1; padding: 1rem 0;">
+    
+    <div class="gs-reveal" style="max-width: 900px;">
+        <div class="logo-stamp" style="display: inline-block; margin-bottom: 2rem;">SYSTEM . ACTIVE</div>
+        
+        <h1 style="margin-bottom: 2rem;">
+            REDEFINE<br>
+            YOUR<br>
+            <span style="-webkit-text-stroke: 4px var(--ink-primary); color: transparent;">DOCUMENTS</span>
+        </h1>
+        
+        <p style="margin-bottom: 4rem; max-width: 500px; border-left: 4px solid var(--ink-primary); padding-left: 1.5rem; font-weight: 600;">
+            A brutalist approach to intelligent formatting. 
+            Connect Notion. Let AI architect your structural integrity and prettify your documents.
+        </p>
+        
+        <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
+            <a href="/login" class="btn btn-primary">
+                AUTHENTICATE // NOTION
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+            </a>
+        </div>
+    </div>
+</div>
+
+<div class="marquee-container gs-reveal">
+    <div class="marquee-content">
+        AI FORMATTING ✦ STRUCTURAL INTEGRITY ✦ SYNTAX HIGHLIGHTING ✦ IDEMPOTENCY ✦ AI REFINEMENT ✦ AI FORMATTING ✦ STRUCTURAL INTEGRITY ✦ SYNTAX HIGHLIGHTING ✦ IDEMPOTENCY ✦ AI REFINEMENT ✦
+    </div>
+</div>
+
+<div class="gs-reveal" style="margin-top: 6rem; margin-bottom: 4rem;">
+    <h2 style="margin-bottom: 3rem; font-size: clamp(1.5rem, 4vw, 3rem);">CORE<br>CAPABILITIES</h2>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem;">
+        <div class="block-card">
+            <h3 style="margin-bottom: 1rem; border-bottom: 2px solid var(--ink-primary); padding-bottom: 0.5rem; display: inline-block;">01 // PRETTIFY</h3>
+            <p>Automatically structure headers, lists, and paragraphs for maximum readability without destroying original phrasing.</p>
+        </div>
+        <div class="block-card">
+            <h3 style="margin-bottom: 1rem; border-bottom: 2px solid var(--ink-primary); padding-bottom: 0.5rem; display: inline-block;">02 // SYNTAX</h3>
+            <p>Detects code languages natively and applies proper Markdown syntax blocks directly into Notion's native format.</p>
+        </div>
+        <div class="block-card">
+            <h3 style="margin-bottom: 1rem; border-bottom: 2px solid var(--ink-primary); padding-bottom: 0.5rem; display: inline-block;">03 // ASYNC</h3>
+            <p>Non-destructive idempotent rendering. Keeps your original ideas intact while elevating the structural facade.</p>
+        </div>
+    </div>
+</div>
+
+<div class="gs-reveal block-card" style="background: var(--ink-primary); color: var(--bg-primary); text-align: center; margin-bottom: 2rem;">
+    <h2 style="font-size: clamp(2rem, 5vw, 4rem); color: var(--bg-primary); margin-bottom: 1rem;">INITIATE PROTOCOL</h2>
+    <p style="margin: 0 auto 2rem auto; max-width: 600px; color: var(--bg-primary); opacity: 0.8;">End the visual clutter. Hand over the formatting to the machine.</p>
+    <a href="/login" class="btn btn-primary" style="border-color: var(--bg-primary); box-shadow: 4px 4px 0px var(--bg-primary); padding: 1rem 3rem;">
+        AUTHENTICATE NOW
+    </a>
+</div>
+{% endblock %}
