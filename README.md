@@ -1,42 +1,38 @@
 # Notion Formatter 🚀
 
-A production-grade tool to automatically format messy Notion pages into beautifully structured documents using AI.
+A simple tool to automatically format messy Notion pages into nicely structured Markdown and append the result back into the same page.
 
 ## ✨ Features
 
-- **OAuth Integration**: Securely connect your Notion workspace.
-- **Recursive Block Fetching**: Deeply traverses your Notion pages to capture all content.
-- **Gemini AI Formatting**: Leverages Google's Gemini 1.5 Flash to intelligently reorganize text, add headings, bold key terms, and fix formatting without losing meaning.
-- **Intelligent Markdown Conversion**: Converts AI output back into native Notion blocks (headings, lists, code blocks with language detection, dividers).
-- **Idempotency**: Safely re-run the formatter on the same page; it automatically replaces its previous output.
-- **Reliable Networking**: Built-in exponential backoff retries for Notion API rate limits and network stability.
+- **Direct Notion integration**: Uses a Notion internal integration token to read and write page content.
+- **OpenRouter LLM Formatting (latest)**: Uses OpenRouter to call modern open‑weight models and turn raw Notion text into clean Markdown (headings, paragraphs, lists, code blocks).
+- **Markdown → Notion blocks**: Converts the LLM’s Markdown output back into Notion blocks that are appended to the page.
+- **One‑click flow**: Paste a Notion page URL in the tiny web UI and the formatted output gets added under the original content.
 
 ## 🛠 Tech Stack
 
-- **Backend**: Python / Flask
-- **LLM**: Google Gemini API
+- **Backend**: Python / Flask (`server.py`)
+- **LLM Gateway**: [OpenRouter](https://openrouter.ai/) HTTP API
 - **Notion SDK**: `notion-client`
-- **Markdown Parsing**: `mistune`
-- **Reliability**: `tenacity` for retries
+- **Config**: `python-dotenv` for `.env` loading
 
 ## 🚀 Getting Started
 
 ### 1. Prerequisites
 - Python 3.8+
-- A Notion Developer Account ([My Integrations](https://www.notion.so/my-integrations))
-- A Google AI Studio API Key ([Get one here](https://aistudio.google.com/app/apikey))
+- A Notion integration token ([My Integrations](https://www.notion.so/my-integrations))
+- An OpenRouter API key ([Get one here](https://openrouter.ai/keys))
 
 ### 2. Setup Environment
 Create a `.env` file in the root directory:
+
 ```bash
-NOTION_CLIENT_ID=your_client_id
-NOTION_CLIENT_SECRET=your_client_secret
-NOTION_REDIRECT_URI=http://localhost:8080
-GEMINI_API_KEY=your_gemini_api_key
-SECRET_KEY=your_flask_secret_key
+NOTION_TOKEN=your_notion_integration_token
+OPENROUTER_API_KEY=your_openrouter_api_key
 ```
 
 ### 3. Install Dependencies
+
 ```bash
 python3 -m venv venv
 source venv/bin/activate
@@ -44,17 +40,27 @@ pip install -r requirements.txt
 ```
 
 ### 4. Run the Application
+
 ```bash
-python3 run.py
+python3 server.py
 ```
-The app will be available at **http://localhost:8080**.
+
+By default the app runs on **http://localhost:3000**.
 
 ## 📖 Usage
-1. Open the app and click **"Connect to Notion"**.
-2. Authorize the pages you want the formatter to access.
-3. Select a page from your dashboard.
-4. Click **"Format Page"**.
-5. Your page will be updated in Notion with a structured "AI Formatted Output" section.
 
-## ⚠️ Important Note for Mac Users
-If you encounter a `403 Forbidden` error on port 5000, please use port **8080** (default in this app) as macOS often reserves port 5000 for AirPlay Receiver.
+1. Open `http://localhost:3000` in your browser.
+2. Paste a Notion page URL that your integration has access to.
+3. Click **"Format & Append"**.
+4. The server:
+	- fetches the page’s text from Notion,
+	- sends it to an OpenRouter model with a "formatter, not writer" prompt,
+	- converts the Markdown response into Notion blocks,
+	- appends the formatted content to the same page.
+
+You’ll see a success or error message in the browser.
+
+## 🔐 Notes
+
+- Keep your `NOTION_TOKEN` and `OPENROUTER_API_KEY` secret and **never commit `.env` to git**.
+- Make sure your Notion integration is shared with the pages/databases you want to format.
