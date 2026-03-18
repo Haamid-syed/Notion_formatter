@@ -49,3 +49,8 @@ nextsteps.md
 test_mistune.py
 test_mistune_code.py
 HANDOFF.md
+
+test_adapters.py
+test_long_text.py
+test_markdown.py
+test_rich_format.py

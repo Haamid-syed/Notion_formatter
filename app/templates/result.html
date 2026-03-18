@@ -1,26 +1,49 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="gs-reveal" style="display: flex; flex-direction: column; align-items: stretch; justify-content: center; flex: 1; padding: 2rem 0;">
+<div class="gs-reveal" style="display: flex; flex-direction: column; align-items: stretch; justify-content: center; flex: 1; padding: 4rem 0; min-height: 80vh; position: relative;">
     
     {% if success %}
-        <div class="block-card" style="background: var(--ink-primary); color: var(--bg-primary); padding: 6rem 4rem; text-align: center;">
-            <h1 style="font-size: clamp(3rem, 12vw, 8rem); color: var(--bg-primary);">SUCCESS</h1>
-            <p style="margin-top: 2rem; border-top: 4px solid var(--bg-primary); padding-top: 2rem; font-size: 1.5rem; text-transform: uppercase;">
-                Document restructured. LLM injection complete.
-            </p>
+        <div class="block-card glass hoverable" style="background: rgba(47, 47, 51, 0.95); color: var(--bg-primary); padding: 8rem 4rem; text-align: center; border-color: var(--ink-primary); border-top: 12px solid #4caf50; position: relative; overflow: hidden; box-shadow: 8px 8px 0px rgba(47, 47, 51, 0.2);">
+            <div style="position: absolute; right: -50px; top: -50px; font-family: var(--font-display); font-size: 20rem; font-weight: 800; color: transparent; -webkit-text-stroke: 4px rgba(255,255,255,0.05); pointer-events: none; line-height: 0.8;">OK</div>
+            
+            <div style="position: relative; z-index: 10;">
+                <div style="display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; background: #4caf50; margin-bottom: 2rem;">
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="color: var(--ink-primary);"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                </div>
+                
+                <h1 style="font-size: clamp(4rem, 12vw, 8rem); color: var(--bg-primary); line-height: 0.8; margin-bottom: 2rem; letter-spacing: -0.05em;">SUCCESS</h1>
+                
+                <p style="margin-top: 2rem; border-top: 1px solid rgba(255,255,255,0.2); padding-top: 2.5rem; font-size: 1.5rem; text-transform: uppercase; max-width: 600px; margin-left: auto; margin-right: auto; color: rgba(255,255,255,0.8);">
+                    Document restructured. Neural injection perfectly mapped to Notion AST.
+                </p>
+            </div>
         </div>
     {% else %}
-        <div class="block-card" style="background: transparent; border-color: #ff5252; color: #ff5252; padding: 6rem 4rem; text-align: center;">
-            <h1 style="font-size: clamp(3rem, 12vw, 8rem); color: #ff5252;">FAILURE</h1>
-            <p style="margin-top: 2rem; border-top: 4px solid #ff5252; padding-top: 2rem; font-size: 1.5rem; text-transform: uppercase; color: var(--ink-primary);">
-                Process terminated organically. Check server logs.
-            </p>
+        <div class="block-card glass hoverable" style="background: rgba(255, 82, 82, 0.05); border-color: #ff5252; color: #ff5252; padding: 8rem 4rem; text-align: center; border-top: 12px solid #ff5252; position: relative; overflow: hidden; box-shadow: 8px 8px 0px rgba(255, 82, 82, 0.2);">
+            <div style="position: absolute; right: -50px; top: -50px; font-family: var(--font-display); font-size: 20rem; font-weight: 800; color: transparent; -webkit-text-stroke: 4px rgba(255, 82, 82, 0.1); pointer-events: none; line-height: 0.8;">ERR</div>
+            
+            <div style="position: relative; z-index: 10;">
+                <div style="display: inline-flex; align-items: center; justify-content: center; width: 60px; height: 60px; border-radius: 50%; background: #ff5252; margin-bottom: 2rem;">
+                    <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="color: var(--bg-primary);"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                </div>
+                
+                <h1 style="font-size: clamp(4rem, 12vw, 8rem); color: #ff5252; line-height: 0.8; margin-bottom: 2rem; letter-spacing: -0.05em;">FAILURE</h1>
+                
+                <p style="margin-top: 2rem; border-top: 1px solid rgba(255, 82, 82, 0.2); padding-top: 2.5rem; font-size: 1.5rem; text-transform: uppercase; color: var(--ink-primary); max-width: 600px; margin-left: auto; margin-right: auto;">
+                    {{ error if error else 'Process terminated organically. Execution aborted.' }}
+                </p>
+                <p style="font-family: var(--font-mono); font-size: 1rem; color: var(--ink-muted); margin-top: 1rem;">
+                    Check server logs or retry the operation.
+                </p>
+            </div>
         </div>
     {% endif %}
     
     <div style="margin-top: 4rem; text-align: center;">
-        <a href="/" class="btn btn-primary" style="font-size: 1.25rem;">RETURN TO INDEX</a>
+        <a href="/" class="btn btn-primary hoverable" style="font-size: 1.25rem; padding: 1.25rem 3rem;">
+            RETURN TO CONTROL CENTER
+        </a>
     </div>
     
 </div>

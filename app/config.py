@@ -9,3 +9,4 @@ class Config:
     NOTION_CLIENT_SECRET = os.environ.get('NOTION_CLIENT_SECRET')
     NOTION_REDIRECT_URI = os.environ.get('NOTION_REDIRECT_URI')
     GEMINI_API_KEY = os.environ.get('GEMINI_API_KEY')
+    OPENROUTER_API_KEY = os.environ.get('OPENROUTER_API_KEY')

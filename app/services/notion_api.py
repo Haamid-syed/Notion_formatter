@@ -61,6 +61,32 @@ class NotionService:
         """Delete (archive) a block."""
         return self.client.blocks.delete(block_id=block_id)
 
+    @retry(wait=wait_exponential(multiplier=1, min=2, max=10), stop=stop_after_attempt(5))
+    def create_page(self, title: str, parent_page_id: str = None) -> dict:
+        """Create a new page. If parent_page_id is None, tries to create in workspace root."""
+        if parent_page_id:
+            logger.info(f"Creating new page '{title}' under parent {parent_page_id}")
+            parent = {"type": "page_id", "page_id": parent_page_id}
+        else:
+            logger.info(f"Creating new page '{title}' at workspace root")
+            # For public integrations, workspace root is possible.
+            # For internal ones, they often must be shared a specific page.
+            parent = {"type": "workspace", "workspace": True}
+        
+        new_page = self.client.pages.create(
+            parent=parent,
+            properties={
+                "title": [
+                    {
+                        "text": {
+                            "content": title
+                        }
+                    }
+                ]
+            }
+        )
+        return new_page
+
     def extract_text(self, blocks: list) -> str:
         """Recursively extract plain text from an array of blocks."""
         extracted = []

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FORM // AI Notion Refiner</title>
+    <title>Notion Formatter</title>
     
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
@@ -12,6 +12,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 </head>
 <body>
+    <div class="custom-cursor" id="custom-cursor"></div>
+    <div class="fluid-blob blob-1"></div>
+    <div class="fluid-blob blob-2"></div>
     <div class="noise-overlay"></div>
     
     <header class="navbar gs-reveal">
@@ -22,13 +25,13 @@
         
         <nav style="display: flex; gap: 2rem; align-items: center;">
             <a href="/about" style="text-decoration: none; color: var(--ink-primary); font-weight: 700; font-family: var(--font-mono); font-size: 0.875rem;">ABOUT</a>
-            <a href="/docs" style="text-decoration: none; color: var(--ink-primary); font-weight: 700; font-family: var(--font-mono); font-size: 0.875rem;">DOCS</a>
+            <a href="/docs" style="text-decoration: none; color: var(--ink-primary); font-weight: 700; font-family: var(--font-mono); font-size: 0.875rem;">HELP</a>
             
             <div class="nav-actions" style="margin-left: 1rem;">
                 {% if session.get('notion_access_token') %}
-                    <a href="/logout" class="btn" style="padding: 0.4rem 1rem; font-size: 0.875rem;">DISCONNECT</a>
+                    <a href="/logout" class="btn" style="padding: 0.4rem 1rem; font-size: 0.875rem;">LOG OUT</a>
                 {% else %}
-                    <a href="/login" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.875rem;">AUTHENTICATE</a>
+                    <a href="/login" class="btn btn-primary" style="padding: 0.4rem 1rem; font-size: 0.875rem;">LOG IN</a>
                 {% endif %}
             </div>
         </nav>
@@ -49,9 +52,9 @@
 
     <footer class="footer gs-reveal">
         <div style="display: flex; gap: 1.5rem; flex-wrap: wrap;">
-            <span>SYS.REQ: AI REFINEMENT ENGINE</span>
+            <span>AI Powered Formatting</span>
             <span style="color: var(--ink-muted);">//</span>
-            <span>NOTION FORMATTER // V2.0</span>
+            <span>Notion Formatter v2.0</span>
         </div>
         <div style="display: flex; gap: 1.5rem;">
             <a href="https://github.com" target="_blank" style="color: var(--ink-primary); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color var(--transition-snap);" onmouseover="this.style.borderColor='var(--ink-primary)'" onmouseout="this.style.borderColor='transparent'">GITHUB</a>
@@ -72,6 +75,19 @@
                 { y: 50, opacity: 0 }, 
                 { y: 0, opacity: 1, duration: 0.8, stagger: 0.1, ease: "power3.out" }
             );
+
+            // Custom Cursor Logic
+            const cursor = document.getElementById('custom-cursor');
+            document.addEventListener('mousemove', (e) => {
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            });
+            
+            const interactibles = document.querySelectorAll('a, button, input, textarea, .hoverable');
+            interactibles.forEach(el => {
+                el.addEventListener('mouseenter', () => cursor.classList.add('hover'));
+                el.addEventListener('mouseleave', () => cursor.classList.remove('hover'));
+            });
         });
     </script>
 </body>

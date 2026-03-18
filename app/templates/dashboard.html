@@ -1,71 +1,140 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="gs-reveal" style="flex: 1;">
-    <h2 style="margin-bottom: 2rem; font-size: clamp(2rem, 6vw, 5rem);">DOCUMENT<br>INDEX</h2>
+<div class="gs-reveal" style="flex: 1; padding: 2rem 0; position: relative; z-index: 10;">
+    <h2 style="margin-bottom: 2rem; font-size: clamp(3rem, 8vw, 6rem); line-height: 0.9; position: relative; display: inline-block;">
+        CONTROL<br>
+        <span style="-webkit-text-stroke: 4px var(--ink-primary); color: transparent;">CENTER</span>
+        <div style="position: absolute; right: -2rem; top: 0; width: 20px; height: 20px; border-radius: 50%; background: #4caf50; animation: pulse 2s infinite;"></div>
+    </h2>
     
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 2rem;">
-        <div class="block-card" style="padding: 1.5rem;">
-            <div style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--ink-muted); margin-bottom: 0.5rem;">CONNECTION STATUS</div>
-            <div style="font-weight: 700; font-size: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
-                <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #4caf50;"></span>
-                NOTION API // ONLINE
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-bottom: 4rem;">
+        <div class="block-card glass hoverable" style="padding: 2rem;">
+            <div style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--ink-muted); margin-bottom: 1rem; border-bottom: 1px solid var(--ink-muted); padding-bottom: 0.5rem;">API LINK STATUS</div>
+            <div style="font-weight: 800; font-size: 1.5rem; display: flex; align-items: center; gap: 0.75rem;">
+                <span style="display: inline-block; width: 12px; height: 12px; border-radius: 0; background: #4caf50;"></span>
+                ONLINE // VERIFIED
             </div>
         </div>
-        <div class="block-card" style="padding: 1.5rem;">
-            <div style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--ink-muted); margin-bottom: 0.5rem;">AVAILABLE TARGETS</div>
-            <div style="font-weight: 700; font-size: 1.25rem;">{{ pages|length }} DOCUMENTS DETECTED</div>
+        <div class="block-card glass hoverable" style="padding: 2rem;">
+            <div style="font-family: var(--font-mono); font-size: 0.875rem; color: var(--ink-muted); margin-bottom: 1rem; border-bottom: 1px solid var(--ink-muted); padding-bottom: 0.5rem;">INDEXED DOCUMENTS</div>
+            <div style="font-weight: 800; font-size: 1.5rem;">
+                <span style="font-family: var(--font-mono); font-size: 2rem; color: var(--ink-primary); margin-right: 0.5rem;">{{ pages|length }}</span> VOLUMES
+            </div>
         </div>
     </div>
 
-    <p style="margin-bottom: 2rem; max-width: 600px;">
-        To process a page, ensure it contains the raw markdown dump and select [ FORMAT ]. The engine will overwrite the structure identically.
-    </p>
+    <!-- OPTION 1: FORMAT EXISTING PAGES -->
+    <div class="block-card glass hoverable" style="margin-bottom: 4rem; border-top: 8px solid var(--ink-primary); padding: 0; overflow: hidden; position: relative;">
+        <!-- Background decorative element -->
+        <div style="position: absolute; right: -50px; bottom: -50px; font-family: var(--font-display); font-size: 15rem; font-weight: 800; color: transparent; -webkit-text-stroke: 2px var(--ink-primary); opacity: 0.05; pointer-events: none; line-height: 0.8;">01</div>
+        
+        <div style="padding: 2.5rem 2.5rem 1.5rem 2.5rem; border-bottom: 1px solid rgba(47, 47, 51, 0.1);">
+            <div style="display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 1rem;">
+                <div>
+                    <h3 style="margin-bottom: 0.5rem; font-size: 1.75rem;">EXISTING VOLUMES</h3>
+                    <p style="color: var(--ink-muted); font-size: 1.1rem; max-width: 500px;">Execute structure optimization routines on initialized workspace pages.</p>
+                </div>
+                <div style="font-family: var(--font-mono); font-weight: 700; background: var(--ink-primary); color: var(--bg-primary); padding: 0.5rem 1rem; font-size: 0.875rem;">PROTOCOL 01</div>
+            </div>
+        </div>
+        
+        {% if pages %}
+        <div style="overflow-x: auto; background: rgba(255,255,255,0.5);">
+            <table class="data-table" style="width: 100%;">
+                <thead>
+                    <tr>
+                        <th style="background: transparent; color: var(--ink-primary); border-bottom: 2px solid var(--ink-primary); padding: 1rem 2.5rem;">TITLE</th>
+                        <th style="background: transparent; color: var(--ink-primary); border-bottom: 2px solid var(--ink-primary); padding: 1rem 2.5rem;">HASH ID</th>
+                        <th style="background: transparent; color: var(--ink-primary); border-bottom: 2px solid var(--ink-primary); padding: 1rem 2.5rem; text-align: right;">EXECUTE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for page in pages %}
+                    <tr class="item-row hoverable" style="border-bottom: 1px solid rgba(47, 47, 51, 0.1);">
+                        <td style="font-weight: 700; font-size: 1.25rem; padding: 1.5rem 2.5rem;">{{ page.title }}</td>
+                        <td style="font-family: var(--font-mono); font-size: 0.9rem; color: var(--ink-muted); padding: 1.5rem 2.5rem;">{{ page.id[:8] }}...</td>
+                        <td style="padding: 1.5rem 2.5rem; text-align: right;">
+                            <form action="/format/{{ page.id }}" method="POST" style="margin: 0;" onsubmit="startFormat(this)">
+                                <button type="submit" class="btn btn-primary hoverable" style="padding: 0.6rem 1.5rem; font-size: 0.9rem;">FORMAT</button>
+                            </form>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% else %}
+        <div style="text-align: center; padding: 4rem 2rem;">
+            <div style="font-family: var(--font-mono); font-size: 4rem; opacity: 0.2; margin-bottom: 1rem;">∅</div>
+            <h3 style="margin-bottom: 1rem;">NO PAGES DETECTED</h3>
+            <p style="color: var(--ink-muted);">Ensure you have granted access to specific pages in Notion.</p>
+            <a href="https://www.notion.so/my-integrations" target="_blank" class="btn hoverable" style="margin-top: 2rem;">RE-AUTHENTICATE</a>
+        </div>
+        {% endif %}
+    </div>
     
-    {% if pages %}
-    <div class="block-card" style="padding: 0; overflow-x: auto;">
-        <table class="data-table">
-            <thead>
-                <tr>
-                    <th>TITLE</th>
-                    <th>ID</th>
-                    <th style="width: 150px;">ACTION</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for page in pages %}
-                <tr class="item-row">
-                    <td style="font-weight: 700; font-size: 1.1rem;">{{ page.title }}</td>
-                    <td style="font-family: var(--font-mono); font-size: 0.9rem; color: var(--ink-muted);">{{ page.id[:8] }}...</td>
-                    <td>
-                        <form action="/format/{{ page.id }}" method="POST" style="margin: 0;" onsubmit="startFormat(this)">
-                            <button type="submit" class="btn" style="padding: 0.5rem 1rem; font-size: 0.8rem; width: 100%;">FORMAT</button>
-                        </form>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 3rem;">
+        <!-- OPTION 2: IMPORT FROM FILE -->
+        <div class="block-card glass hoverable" style="border-top: 8px solid var(--ink-primary); position: relative; overflow: hidden;">
+            <div style="position: absolute; right: -20px; top: 20px; font-family: var(--font-display); font-size: 8rem; font-weight: 800; color: transparent; -webkit-text-stroke: 2px var(--ink-primary); opacity: 0.05; pointer-events: none; line-height: 0.8;">02</div>
+            <h3 style="margin-bottom: 0.5rem; font-size: 1.5rem;">RAW IMPORT // FILE INGEST</h3>
+            <p style="color: var(--ink-muted); font-size: 1rem; margin-bottom: 2.5rem; border-left: 2px solid var(--ink-primary); padding-left: 1rem;">Extract structure from chaos. Upload DOCX or PDF files and we'll rebuild them as perfect Notion nodes.</p>
+            
+            <form action="/import_file" method="POST" enctype="multipart/form-data" onsubmit="startFormat(this)">
+                <div style="margin-bottom: 2rem;">
+                    <label style="display: block; font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem; margin-bottom: 0.75rem; letter-spacing: 0.05em;">DESIGNATION (OPTIONAL)</label>
+                    <input type="text" class="hoverable" name="title" placeholder="Leave blank to use filename..." style="width: 100%; padding: 1rem; background: rgba(255,255,255,0.5); border: 2px solid var(--ink-primary); color: var(--ink-primary); font-family: var(--font-mono); font-size: 1rem; outline: none; transition: background 0.3s; focus: background: var(--bg-primary);">
+                </div>
+                <div style="margin-bottom: 2.5rem;">
+                    <label style="display: block; font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem; margin-bottom: 0.75rem; letter-spacing: 0.05em;">SOURCE ATTACHMENT</label>
+                    <div style="position: relative; width: 100%; padding: 1.5rem; border: 2px dashed var(--ink-primary); background: rgba(0,0,0,0.02); text-align: center; transition: all 0.3s;" class="hoverable upload-zone">
+                        <input type="file" name="file" accept=".pdf,.docx" style="position: absolute; top:0; left:0; width:100%; height:100%; opacity:0; cursor:pointer;" required>
+                        <span style="font-family: var(--font-mono); font-weight: 700;">SELECT .PDF OR .DOCX</span>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary hoverable" style="width: 100%; padding: 1.25rem; font-size: 1.1rem;">INITIALIZE IMPORT</button>
+            </form>
+        </div>
+
+        <!-- OPTION 3: UNIFIED PAGE CREATOR -->
+        <div class="block-card glass hoverable" style="border-top: 8px solid var(--ink-primary); position: relative; overflow: hidden;">
+            <div style="position: absolute; right: -20px; top: 20px; font-family: var(--font-display); font-size: 8rem; font-weight: 800; color: transparent; -webkit-text-stroke: 2px var(--ink-primary); opacity: 0.05; pointer-events: none; line-height: 0.8;">03</div>
+            <h3 style="margin-bottom: 0.5rem; font-size: 1.5rem;">NEURAL SYNTHESIS // GENERATOR</h3>
+            <p style="color: var(--ink-muted); font-size: 1rem; margin-bottom: 2.5rem; border-left: 2px solid var(--ink-primary); padding-left: 1rem;">Declare your parameters. The AI will research, architect, and inject a completely original document.</p>
+            
+            <form action="/create_page" method="POST" onsubmit="startFormat(this)">
+                <div style="margin-bottom: 2rem;">
+                    <label style="display: block; font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem; margin-bottom: 0.75rem; letter-spacing: 0.05em;">TARGET DESIGNATION</label>
+                    <input type="text" class="hoverable" name="title" placeholder="e.g. Master Guide to Quantum Computing" style="width: 100%; padding: 1rem; background: rgba(255,255,255,0.5); border: 2px solid var(--ink-primary); color: var(--ink-primary); font-family: var(--font-mono); font-size: 1rem; outline: none;" required>
+                </div>
+                <div style="margin-bottom: 2.5rem;">
+                    <label style="display: block; font-family: var(--font-mono); font-weight: 700; font-size: 0.85rem; margin-bottom: 0.75rem; letter-spacing: 0.05em;">SYNTHESIS DIRECTIVE</label>
+                    <textarea class="hoverable" name="prompt" placeholder="Provide constraints, requirements, and structural requests..." style="width: 100%; min-height: 120px; padding: 1rem; background: rgba(255,255,255,0.5); border: 2px solid var(--ink-primary); color: var(--ink-primary); font-family: var(--font-mono); font-size: 0.95rem; line-height: 1.5; resize: vertical; outline: none;"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary hoverable" style="width: 100%; padding: 1.25rem; font-size: 1.1rem;">ENGAGE SYNTHESIS</button>
+            </form>
+        </div>
     </div>
-    {% else %}
-    <div class="block-card" style="text-align: center; padding: 6rem 2rem;">
-        <h3 style="margin-bottom: 1rem;">NO DATA FOUND</h3>
-        <p>Ensure documents are shared with the integration.</p>
-        <a href="https://www.notion.so/my-integrations" target="_blank" class="btn" style="margin-top: 2rem;">MANAGE PERMISSIONS</a>
-    </div>
-    {% endif %}
 </div>
 
 <!-- Brutalist Loading Overlay -->
 <div id="loadingOverlay" class="formatting-overlay">
-    <div style="width: 100%; max-width: 800px; padding: 2rem;">
-        <h1 class="blink-text" style="font-size: clamp(2rem, 10vw, 8rem); margin-bottom: 1rem; color: var(--bg-primary);">PROCESSING</h1>
-        <div style="border-top: 4px solid var(--bg-primary); padding-top: 1rem; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 1.25rem;">
-            <span>INITIATING AI SEQUENCE</span>
+    <div style="position: absolute; top:0; left:0; width:100%; height:100%; background: url('data:image/svg+xml,%3Csvg viewBox=\"0 0 200 200\" xmlns=\"http://www.w3.org/2000/svg\"%3E%3Cfilter id=\"noiseFilter\"%3E%3CfeTurbulence type=\"fractalNoise\" baseFrequency=\"0.65\" numOctaves=\"3\" stitchTiles=\"stitch\"/%3E%3C/filter%3E%3Crect width=\"100%25\" height=\"100%25\" filter=\"url(%23noiseFilter)\"/%3E%3C/svg%3E'); opacity: 0.05; pointer-events: none;"></div>
+    
+    <div style="width: 100%; max-width: 800px; padding: 2rem; position: relative; z-index: 10;">
+        <h1 class="blink-text" style="font-size: clamp(3rem, 12vw, 10rem); margin-bottom: 1rem; color: var(--bg-primary); line-height: 0.8;">EXECUTING<br>ROUTINE</h1>
+        <div style="border-top: 4px solid var(--bg-primary); padding-top: 1.5rem; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 1.5rem; font-weight: 700; color: var(--bg-primary);">
+            <span>SYSTEM OVERRIDE ACTIVE</span>
             <span class="loading-counter">0%</span>
         </div>
-        <div style="height: 4px; background: rgba(245,246,247,0.2); margin-top: 1rem; position: relative; overflow: hidden;">
+        <div style="height: 6px; background: rgba(245,246,247,0.1); margin-top: 1.5rem; position: relative; overflow: hidden;">
             <div class="progress-bar" style="position: absolute; top:0; left:0; height: 100%; width: 0%; background: var(--bg-primary);"></div>
+        </div>
+        <div style="margin-top: 2rem; font-family: var(--font-mono); color: var(--bg-primary); opacity: 0.5; font-size: 0.875rem;">
+            > Initializing LLM payload...<br>
+            > Awaiting API response via synchronous socket...<br>
+            > Formatting structural elements...
         </div>
     </div>
 </div>
@@ -73,6 +142,17 @@
 <style>
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
     .blink-text { animation: blink 1s step-end infinite; }
+    
+    .upload-zone:hover {
+        background: rgba(0,0,0,0.05) !important;
+        border-color: var(--ink-primary);
+    }
+    
+    @keyframes pulse {
+        0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(76, 175, 80, 0.7); }
+        70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(76, 175, 80, 0); }
+        100% { transform: scale(1); box-shadow: 0 0 0 0 rgba(76, 175, 80, 0); }
+    }
 </style>
 
 <script>
@@ -83,7 +163,7 @@
         const btn = form.querySelector('button');
         
         btn.disabled = true;
-        btn.innerText = 'WAIT';
+        btn.innerText = 'WAIT...';
         
         overlay.classList.add('active');
         
@@ -96,5 +176,16 @@
             counter.innerText = Math.floor(prog) + '%';
         }, 300);
     }
+    
+    // File input UX
+    document.querySelectorAll('input[type="file"]').forEach(input => {
+        input.addEventListener('change', function(e) {
+            if(this.files.length > 0) {
+                const span = this.parentElement.querySelector('span');
+                span.innerText = this.files[0].name;
+                span.style.color = 'var(--ink-primary)';
+            }
+        });
+    });
 </script>
 {% endblock %}

@@ -1,4 +1,6 @@
+import os
 import requests
+from werkzeug.utils import secure_filename
 from flask import Blueprint, render_template, session, redirect, url_for, current_app, request
 from notion_client import Client
 
@@ -90,3 +92,81 @@ def format_page(page_id):
     success = pipeline.run(page_id)
     
     return render_template('result.html', success=success)
+
+@bp.route('/import_file', methods=['POST'])
+def import_file():
+    from app.services.format_pipeline import FormatPipeline
+    from app.services.adapters import FileAdapter
+    from app.services.llm_api import GeminiService
+    from app.services.notion_api import NotionService
+    
+    token = session.get('notion_access_token')
+    if not token: return redirect(url_for('auth.login'))
+    
+    title = request.form.get('title')
+    file = request.files.get('file')
+    if not file or file.filename == "":
+        return render_template('result.html', success=False)
+        
+    # If no title provided, use filename without extension
+    if not title:
+        title = os.path.splitext(file.filename)[0].replace('_', ' ').title()
+
+    filename = secure_filename(file.filename)
+    filepath = os.path.join(current_app.config.get('UPLOAD_FOLDER', '/tmp'), filename)
+    file.save(filepath)
+    
+    try:
+        # 1. Create the new page at workspace root
+        notion_service = NotionService(token)
+        new_page = notion_service.create_page(title, None)
+        new_page_id = new_page['id']
+        
+        # 2. Run the pipeline with the file adapter targeting the new page
+        adapter = FileAdapter(filepath, filename, GeminiService())
+        pipeline = FormatPipeline(token)
+        success = pipeline.run_with_adapter(adapter, new_page_id)
+        
+        return render_template('result.html', success=success)
+    except Exception as e:
+        current_app.logger.error(f"Failed to import and format file: {e}", exc_info=True)
+        return render_template('result.html', success=False)
+    finally:
+        try:
+            if os.path.exists(filepath):
+                os.remove(filepath)
+        except Exception:
+            pass
+
+@bp.route('/create_page', methods=['POST'])
+def create_page():
+    from app.services.format_pipeline import FormatPipeline
+    from app.services.adapters import WorkspacePageCreator
+    from app.services.llm_api import GeminiService
+    from app.services.notion_api import NotionService
+
+    token = session.get('notion_access_token')
+    if not token: return redirect(url_for('auth.login'))
+    
+    title = request.form.get('title')
+    prompt = request.form.get('prompt', '')
+    
+    if not title:
+        return render_template('result.html', success=False)
+        
+    try:
+        # Create the blank page at workspace root by passing None as parent
+        notion_service = NotionService(token)
+        new_page = notion_service.create_page(title, None)
+        new_page_id = new_page['id']
+        
+        # Now run the pipeline with the specific creator adapter targeting the new page
+        adapter = WorkspacePageCreator(title, prompt, notion_service, GeminiService())
+        pipeline = FormatPipeline(token)
+        success = pipeline.run_with_adapter(adapter, new_page_id)
+        
+        return render_template('result.html', success=success)
+        
+    except Exception as e:
+        current_app.logger.error(f"Failed to create new page: {e}", exc_info=True)
+        return render_template('result.html', success=False)
