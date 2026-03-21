@@ -1,28 +1,33 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="gs-reveal" style="flex: 1;">
-    <h2 style="margin-bottom: 2rem; font-size: clamp(2rem, 5vw, 4rem);">SYSTEM <br> DOCS</h2>
+<div class="gs-reveal" style="flex: 1; margin-top: 2rem;">
+    <h2 style="margin-bottom: 4rem; font-size: clamp(3rem, 8vw, 6.5rem);">SYSTEM <br> DOCS</h2>
     
-    <div class="block-card" style="margin-bottom: 2rem;">
-        <h3 style="margin-bottom: 1rem;">1. AUTHENTICATION</h3>
-        <p>
-            Connect your workspace using the standard Notion OAuth flow. You must selectively grant access to specific pages—the system does not request full workspace clearance. Only selected index pages and their children are visible.
-        </p>
-    </div>
+    <div style="display: grid; grid-template-columns: 1fr; gap: 3rem; margin-bottom: 5rem;">
+        <div class="block-card data-hover gs-reveal-scroll" style="padding: 4rem;">
+            <div style="font-family: var(--font-display); font-size: 4rem; font-weight: 900; color: transparent; -webkit-text-stroke: 2px var(--ink-light); margin-bottom: 1rem; line-height: 1;">01</div>
+            <h3 style="margin-bottom: 1.5rem; font-size: 2.5rem;">AUTHENTICATION</h3>
+            <p style="font-size: 1.25rem; line-height: 1.6; max-width: 800px;">
+                Connect your workspace using the standard Notion OAuth flow. You must selectively grant access to specific pages—the system does not request full workspace clearance. Only selected index pages and their children are visible.
+            </p>
+        </div>
 
-    <div class="block-card" style="margin-bottom: 2rem;">
-        <h3 style="margin-bottom: 1rem;">2. NON-DESTRUCTIVE EDITING</h3>
-        <p>
-            When a formatting trigger is invoked, the AI engine analyzes the content payload. It renders a new native Notion layout and appends it. The system tags its own generated elements and performs idempotent checks—meaning it will automatically delete its own previous formatting runs if you run it again, ensuring no duplication.
-        </p>
-    </div>
+        <div class="block-card data-hover gs-reveal-scroll" style="padding: 4rem; background: var(--ink-primary); color: var(--bg-primary);">
+            <div style="font-family: var(--font-display); font-size: 4rem; font-weight: 900; color: transparent; -webkit-text-stroke: 2px rgba(245,246,247,0.3); margin-bottom: 1rem; line-height: 1;">02</div>
+            <h3 style="margin-bottom: 1.5rem; font-size: 2.5rem; color: var(--bg-primary);">NON-DESTRUCTIVE EDITING</h3>
+            <p style="font-size: 1.25rem; line-height: 1.6; max-width: 800px; color: rgba(245,246,247,0.8);">
+                When a formatting trigger is invoked, the AI engine analyzes the content payload. It renders a new native Notion layout and appends it. The system tags its own generated elements and performs idempotent checks—meaning it will automatically delete its own previous formatting runs if you run it again, ensuring no duplication.
+            </p>
+        </div>
 
-    <div class="block-card" style="margin-bottom: 2rem;">
-        <h3 style="margin-bottom: 1rem;">3. SYNTAX EXTRACTION</h3>
-        <p>
-            If raw code dumps exist in the page, the system automatically infers the language runtime, segregates the code, and assigns it to a <code>code_block</code> property with native Notion syntax highlighting configured.
-        </p>
+        <div class="block-card data-hover gs-reveal-scroll" style="padding: 4rem;">
+            <div style="font-family: var(--font-display); font-size: 4rem; font-weight: 900; color: transparent; -webkit-text-stroke: 2px var(--ink-light); margin-bottom: 1rem; line-height: 1;">03</div>
+            <h3 style="margin-bottom: 1.5rem; font-size: 2.5rem;">SYNTAX EXTRACTION</h3>
+            <p style="font-size: 1.25rem; line-height: 1.6; max-width: 800px;">
+                If raw code dumps exist in the page, the system automatically infers the language runtime, segregates the code, and assigns it to a <code style="font-family: var(--font-mono); background: var(--bg-secondary); padding: 0.2rem 0.6rem; border: var(--border-weight) solid var(--border-color);">code_block</code> property with native Notion syntax highlighting configured.
+            </p>
+        </div>
     </div>
 </div>
 {% endblock %}

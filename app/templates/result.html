@@ -1,26 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="gs-reveal" style="display: flex; flex-direction: column; align-items: stretch; justify-content: center; flex: 1; padding: 2rem 0;">
+<div class="gs-reveal" style="display: flex; flex-direction: column; align-items: stretch; justify-content: center; flex: 1; padding: 4rem 0;">
     
     {% if success %}
-        <div class="block-card" style="background: var(--ink-primary); color: var(--bg-primary); padding: 6rem 4rem; text-align: center;">
-            <h1 style="font-size: clamp(3rem, 12vw, 8rem); color: var(--bg-primary);">SUCCESS</h1>
-            <p style="margin-top: 2rem; border-top: 4px solid var(--bg-primary); padding-top: 2rem; font-size: 1.5rem; text-transform: uppercase;">
+        <div class="block-card data-hover" style="background: var(--ink-primary); color: var(--bg-primary); padding: 10rem 4rem; text-align: center; border-color: transparent;">
+            <h1 style="font-size: clamp(4rem, 15vw, 10rem); color: var(--bg-primary); letter-spacing: -0.05em; line-height: 0.85; margin-bottom: 2rem;">SUCCESS</h1>
+            <p style="margin-top: 3rem; border-top: var(--border-weight) solid rgba(245,246,247,0.2); padding-top: 3rem; font-size: 1.75rem; text-transform: uppercase; font-weight: 500; font-family: var(--font-mono); letter-spacing: 0.05em;">
                 Document restructured. LLM injection complete.
             </p>
         </div>
     {% else %}
-        <div class="block-card" style="background: transparent; border-color: #ff5252; color: #ff5252; padding: 6rem 4rem; text-align: center;">
-            <h1 style="font-size: clamp(3rem, 12vw, 8rem); color: #ff5252;">FAILURE</h1>
-            <p style="margin-top: 2rem; border-top: 4px solid #ff5252; padding-top: 2rem; font-size: 1.5rem; text-transform: uppercase; color: var(--ink-primary);">
+        <div class="block-card data-hover" style="background: transparent; border: var(--border-weight) solid #ff3366; color: #ff3366; padding: 10rem 4rem; text-align: center; box-shadow: 8px 8px 0px #ff3366;">
+            <h1 style="font-size: clamp(4rem, 15vw, 10rem); color: #ff3366; letter-spacing: -0.05em; line-height: 0.85; margin-bottom: 2rem;">FAILURE</h1>
+            <p style="margin-top: 3rem; border-top: var(--border-weight) solid #ff3366; padding-top: 3rem; font-size: 1.75rem; text-transform: uppercase; font-weight: 500; font-family: var(--font-mono); letter-spacing: 0.05em; color: var(--ink-primary);">
                 Process terminated organically. Check server logs.
             </p>
         </div>
     {% endif %}
     
-    <div style="margin-top: 4rem; text-align: center;">
-        <a href="/" class="btn btn-primary" style="font-size: 1.25rem;">RETURN TO INDEX</a>
+    <div style="margin-top: 6rem; text-align: center;">
+        <a href="/" class="btn btn-primary data-hover" style="font-size: 1.25rem; padding: 1.5rem 4rem;">RETURN TO INDEX</a>
     </div>
     
 </div>
