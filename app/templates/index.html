@@ -3,42 +3,67 @@
 {% block content %}
 <!-- Hero Section -->
 <div
-    style="position: relative; min-height: calc(100vh - 8rem); display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; overflow: hidden;">
+    style="position: relative; min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; margin-top: -10rem; padding-top: 10rem; overflow: hidden;">
 
-    <!-- Global Vanta Background is now handled in base.html -->
+    <!-- Stunning True 3D Network Background -->
+    <div id="vanta-bg" style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            if (typeof VANTA !== 'undefined') {
+                VANTA.NET({
+                    el: "#vanta-bg",
+                    mouseControls: true,
+                    touchControls: true,
+                    gyroControls: false,
+                    minHeight: 200.00,
+                    minWidth: 200.00,
+                    scale: 1.00,
+                    scaleMobile: 1.00,
+                    color: 0x1a1a1c, /* ink-primary */
+                    backgroundColor: 0xf5f6f7, /* bg-primary */
+                    points: 14.00,
+                    maxDistance: 24.00,
+                    spacing: 18.00,
+                    showDots: true
+                });
+            }
+        });
+    </script>
 
     <!-- Hero Content -->
     <div class="gs-reveal"
-        style="width: 95%; max-width: 1000px; padding: clamp(1.5rem, 5vw, 3rem); background: rgba(255, 255, 255, 0); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(3px); border: 1px solid rgba(26,26,28,0.08); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.04); border-radius: 20px;">
+        style="max-width: 1100px; padding: 4rem; background: rgba(255, 255, 255, 0); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(26,26,28,0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); border-radius: 20px;">
 
         <div class="logo-stamp data-hover"
             style="display: inline-block; margin-bottom: 2.5rem; font-family: var(--font-mono); letter-spacing: 0.2em;">
             SYSTEM . ACTIVE // V2.0</div>
 
-        <h1
-            style="margin-bottom: 1rem; color: var(--ink-primary); font-size: clamp(2.5rem, 8vw, 6rem); line-height: 0.95;">
+        <h1 style="margin-bottom: 1.5rem; color: var(--ink-primary);">
             REDEFINE<br>
             YOUR<br>
             <span
-                style="position: relative; color: var(--bg-primary); -webkit-text-stroke: 1.5px var(--ink-primary); text-shadow: 4px 4px 0px var(--ink-primary);">
+                style="position: relative; color: var(--bg-primary); -webkit-text-stroke: 2px var(--ink-primary); text-shadow: 6px 6px 0px var(--ink-primary);">
                 DOCUMENTS
             </span>
         </h1>
 
-        <p style="margin: 0 auto 3rem auto; max-width: 600px; font-weight: 600; font-size: 1.25rem; line-height: 1.4;">
+        <p style="margin: 0 auto 4rem auto; max-width: 650px; font-weight: 600; font-size: 1.5rem; line-height: 1.4;">
             A high-end brutalist approach to intelligent formatting.
             Connect Notion. Let AI architect your structural integrity.
         </p>
 
-        <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
-            <a href="/login" class="btn btn-primary data-hover" style="padding: 1.25rem 3rem; font-size: 1rem;">
+        <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+            <a href="/login" class="btn btn-primary data-hover" style="padding: 1.5rem 3.5rem; font-size: 1.1rem;">
                 AUTHENTICATE // NOTION
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                     <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>
             </a>
-            <a href="#capabilities" class="btn data-hover scroll-btn" style="padding: 1.25rem 3rem; font-size: 1rem;">
+            <a href="#capabilities" class="btn data-hover scroll-btn"
+                style="padding: 1.5rem 3.5rem; font-size: 1.1rem;">
                 DISCOVER MORE
             </a>
         </div>
@@ -55,20 +80,46 @@
 <div id="capabilities" class="gs-reveal-scroll"
     style="margin-top: 10rem; margin-bottom: 8rem; position: relative; z-index: 10;">
     <h2
-        style="margin-bottom: 3rem; text-align: center; background: var(--ink-primary); color: var(--bg-primary); display: inline-block; padding: 1rem 3rem; transform: rotate(-1deg);">
+        style="margin-bottom: 5rem; text-align: center; background: var(--ink-primary); color: var(--bg-primary); display: inline-block; padding: 1rem 3rem; transform: rotate(-1deg);">
         CORE CAPABILITIES</h2>
-    
-    {% include "components/bento_features.html" %}
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 3rem;">
+        <div class="block-card data-hover" style="padding: 4rem 3rem;">
+            <div
+                style="font-family: var(--font-display); font-size: 5rem; font-weight: 900; color: transparent; -webkit-text-stroke: 2px var(--ink-primary); margin-bottom: 1rem; line-height: 1;">
+                01</div>
+            <h3 style="margin-bottom: 1.5rem; font-size: 2.2rem;">PRETTIFY</h3>
+            <p>Automatically structure headers, lists, and paragraphs for maximum readability without destroying
+                original phrasing.</p>
+        </div>
+        <div class="block-card data-hover"
+            style="padding: 4rem 3rem; background: var(--ink-primary); color: var(--bg-primary); transform: translateY(-20px);">
+            <div
+                style="font-family: var(--font-display); font-size: 5rem; font-weight: 900; color: transparent; -webkit-text-stroke: 2px var(--bg-primary); margin-bottom: 1rem; line-height: 1;">
+                02</div>
+            <h3 style="margin-bottom: 1.5rem; font-size: 2.2rem; color: var(--bg-primary);">SYNTAX</h3>
+            <p style="color: rgba(245,246,247,0.8);">Detects code languages natively and applies proper Markdown syntax
+                blocks directly into Notion's native format.</p>
+        </div>
+        <div class="block-card data-hover" style="padding: 4rem 3rem;">
+            <div
+                style="font-family: var(--font-display); font-size: 5rem; font-weight: 900; color: transparent; -webkit-text-stroke: 2px var(--ink-primary); margin-bottom: 1rem; line-height: 1;">
+                03</div>
+            <h3 style="margin-bottom: 1.5rem; font-size: 2.2rem;">ASYNC</h3>
+            <p>Non-destructive idempotent rendering. Keeps your original ideas intact while elevating the structural
+                facade.</p>
+        </div>
+    </div>
 </div>
 
 <div class="gs-reveal-scroll block-card data-hover"
-    style="background: var(--ink-primary); color: var(--bg-primary); text-align: center; margin-bottom: 6rem; padding: clamp(3rem, 10vw, 8rem) clamp(1rem, 5vw, 2rem); border-color: transparent; border-radius: 20px; box-shadow: 0 16px 40px rgba(0,0,0,0.1);">
-    <h2 style="font-size: clamp(2.5rem, 8vw, 5.5rem); color: var(--bg-primary); margin-bottom: 1.5rem; letter-spacing: -0.04em; line-height: 1;">ELEVATE YOUR WORKFLOW
+    style="background: var(--ink-primary); color: var(--bg-primary); text-align: center; margin-bottom: 6rem; padding: 8rem 2rem; border-color: transparent;">
+    <h2 style="font-size: clamp(3rem, 8vw, 6.5rem); color: var(--bg-primary); margin-bottom: 1.5rem;">INITIATE PROTOCOL
     </h2>
-    <p style="margin: 0 auto 4rem auto; max-width: 600px; color: rgba(245,246,247,0.7); font-size: clamp(1rem, 4vw, 1.25rem); line-height: 1.5;">Automate the structural formatting of your documents. Connect Notion and let AI handle the presentation layer with zero configuration.</p>
+    <p style="margin: 0 auto 4rem auto; max-width: 600px; color: rgba(245,246,247,0.8); font-size: 1.25rem;">End the
+        visual clutter. Hand over the formatting to the machine.</p>
     <a href="/login" class="btn btn-primary data-hover"
-        style="border-color: var(--bg-primary); padding: 1.25rem 4rem; font-size: 1.15rem; border-radius: 0;">
-        CONNECT WORKSPACE
+        style="border-color: var(--bg-primary); padding: 1.5rem 5rem; font-size: 1.25rem;">
+        AUTHENTICATE NOW
     </a>
 </div>
 
