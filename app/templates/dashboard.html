@@ -31,7 +31,8 @@
     </p>
 
     <!-- Quick Actions Section -->
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 3rem; margin-bottom: 6rem;">
+    <div
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 3rem; margin-bottom: 6rem;">
         <!-- Create from Topic -->
         <div class="block-card data-hover" style="padding: 3.5rem;">
             <h3 style="margin-bottom: 1.5rem; font-size: 2rem;">START A NEW TOPIC</h3>
@@ -62,14 +63,17 @@
                     <input type="file" name="file" accept=".md" required
                         style="width: 100%; padding: 1.2rem; border: var(--border-weight) dashed var(--border-color); background: rgba(26,26,28,0.02); cursor: pointer;">
                 </div>
-                <button type="submit" class="btn data-hover" style="width: 100%; padding: 1.5rem; background: var(--ink-primary); color: var(--bg-primary);">
+                <button type="submit" class="btn data-hover"
+                    style="width: 100%; padding: 1.5rem; background: var(--ink-primary); color: var(--bg-primary);">
                     UPLOAD & FORMAT
                 </button>
             </form>
         </div>
     </div>
 
-    <h3 style="margin-bottom: 2.5rem; font-size: 2.2rem; background: var(--ink-primary); color: var(--bg-primary); display: inline-block; padding: 0.5rem 2rem;">FORMAT EXISTING</h3>
+    <h3
+        style="margin-bottom: 2.5rem; font-size: 2.2rem; background: var(--ink-primary); color: var(--bg-primary); display: inline-block; padding: 0.5rem 2rem;">
+        Format Existing Pages</h3>
 
 
     {% if pages %}
@@ -105,7 +109,8 @@
     {% else %}
     <div class="block-card data-hover" style="text-align: center; padding: 10rem 2rem; margin-bottom: 5rem;">
         <h3 style="margin-bottom: 1.5rem; font-size: 3rem;">NO PAGES FOUND</h3>
-        <p style="margin: 0 auto; max-width: 450px; color: var(--ink-muted); font-size: 1.25rem;">Make sure you've shared your Notion pages with this app.</p>
+        <p style="margin: 0 auto; max-width: 450px; color: var(--ink-muted); font-size: 1.25rem;">Make sure you've
+            shared your Notion pages with this app.</p>
         <a href="https://www.notion.so/my-integrations" target="_blank" class="btn data-hover"
             style="margin-top: 4rem;">MANAGE PERMISSIONS</a>
     </div>
