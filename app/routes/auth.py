@@ -7,11 +7,14 @@ bp = Blueprint('auth', __name__)
 
 @bp.route('/login')
 def login():
-    client_id = current_app.config.get('NOTION_CLIENT_ID').strip()
-    redirect_uri = current_app.config.get('NOTION_REDIRECT_URI').strip()
+    client_id = current_app.config.get('NOTION_CLIENT_ID')
+    redirect_uri = current_app.config.get('NOTION_REDIRECT_URI')
     
     if not client_id or not redirect_uri:
-        return "Missing Notion OAuth config", 500
+        return "Missing Notion OAuth config (NOTION_CLIENT_ID or NOTION_REDIRECT_URI). Please add them to your Vercel Environment Variables.", 500
+
+    client_id = client_id.strip()
+    redirect_uri = redirect_uri.strip()
 
     encoded_redirect = urllib.parse.quote(redirect_uri, safe='')
     notion_auth_url = (
