@@ -172,7 +172,7 @@ p {
 /* Navbar - Absolute & Glassmorphic */
 .navbar {
   position: absolute;
-  top: 1.5rem;
+  top: 1.2rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -196,8 +196,19 @@ p {
 }
 
 @media (max-width: 768px) {
-  .navbar { top: 1rem; width: 95%; padding: 0.5rem 1rem; flex-direction: column; gap: 1rem; backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); }
-  body { padding-top: 10rem; }
+  .navbar {
+    top: 1rem;
+    width: 95%;
+    padding: 0.5rem 1rem;
+    flex-direction: column;
+    gap: 1rem;
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+  }
+
+  body {
+    padding-top: 10rem;
+  }
 }
 
 /* Footer */
@@ -337,9 +348,17 @@ p {
   box-shadow: var(--shadow-brutal);
   transform: translateY(-4px);
 }
+
 @media (max-width: 768px) {
-  .block-card { padding: 1.5rem; }
-  .btn { width: 100%; justify-content: center; padding: 1rem; }
+  .block-card {
+    padding: 1.5rem;
+  }
+
+  .btn {
+    width: 100%;
+    justify-content: center;
+    padding: 1rem;
+  }
 }
 
 /* Premium 3D Skewed Marquee */
