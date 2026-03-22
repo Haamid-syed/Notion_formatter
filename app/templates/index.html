@@ -3,7 +3,7 @@
 {% block content %}
 <!-- Hero Section -->
 <div
-    style="position: relative; min-height: 90vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; margin-top: -10rem; padding-top: 10rem; overflow: hidden;">
+    style="position: relative; min-height: 85vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; margin-top: -10rem; padding-top: 12rem; overflow: hidden;">
 
     <!-- Stunning True 3D Network Background -->
     <div id="vanta-bg" style="position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -1;"></div>
@@ -34,37 +34,38 @@
 
     <!-- Hero Content -->
     <div class="gs-reveal"
-        style="max-width: 1100px; padding: 4rem; background: rgba(255, 255, 255, 0); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(26,26,28,0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); border-radius: 20px;">
+        style="max-width: 1000px; padding: 2.5rem 4rem; background: rgba(255, 255, 255, 0); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); border: 1px solid rgba(26,26,28,0.1); box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.1); border-radius: 20px;">
 
         <div class="logo-stamp data-hover"
-            style="display: inline-block; margin-bottom: 2.5rem; font-family: var(--font-mono); letter-spacing: 0.2em;">
-            SYSTEM . ACTIVE // V2.0</div>
+            style="display: inline-block; margin-bottom: 2rem; font-family: var(--font-mono); letter-spacing: 0.2em; font-size: 0.8rem;">
+            VERSION // 2.0</div>
 
-        <h1 style="margin-bottom: 1.5rem; color: var(--ink-primary);">
-            REDEFINE<br>
-            YOUR<br>
+        <h1 style="margin-bottom: 1rem; color: var(--ink-primary); line-height: 0.85; display: flex; flex-direction: column; align-items: center; gap: 0.25rem; font-size: clamp(3rem, 10vw, 7rem);"
+            class="gs-reveal">
+            <span class="data-hover">REDEFINE</span>
+            <span class="data-hover">YOUR</span>
             <span
-                style="position: relative; color: var(--bg-primary); -webkit-text-stroke: 2px var(--ink-primary); text-shadow: 6px 6px 0px var(--ink-primary);">
+                style="position: relative; color: var(--bg-primary); -webkit-text-stroke: 2px var(--ink-primary); text-shadow: 6px 6px 0px var(--ink-primary); padding: 0 1rem;"
+                class="data-hover">
                 DOCUMENTS
             </span>
         </h1>
 
-        <p style="margin: 0 auto 4rem auto; max-width: 650px; font-weight: 600; font-size: 1.5rem; line-height: 1.4;">
-            A high-end brutalist approach to intelligent formatting.
-            Connect Notion. Let AI architect your structural integrity.
+        <p style="margin: 0 auto 3rem auto; max-width: 600px; font-weight: 600; font-size: 1.25rem; line-height: 1.4;">
+            Smart, AI-powered formatting for your Notion workspace.
+            Connect your account and get perfectly structured documents in seconds.
         </p>
 
-        <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
-            <a href="/login" class="btn btn-primary data-hover" style="padding: 1.5rem 3.5rem; font-size: 1.1rem;">
-                AUTHENTICATE // NOTION
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <div style="display: flex; gap: 1.5rem; justify-content: center; flex-wrap: wrap;">
+            <a href="/login" class="btn btn-primary data-hover" style="padding: 1.2rem 3rem; font-size: 1rem;">
+                CONNECT NOTION
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <line x1="5" y1="12" x2="19" y2="12"></line>
                     <polyline points="12 5 19 12 12 19"></polyline>
                 </svg>
             </a>
-            <a href="#capabilities" class="btn data-hover scroll-btn"
-                style="padding: 1.5rem 3.5rem; font-size: 1.1rem;">
-                DISCOVER MORE
+            <a href="#capabilities" class="btn data-hover scroll-btn" style="padding: 1.2rem 3rem; font-size: 1rem;">
+                LEARN MORE
             </a>
         </div>
     </div>
@@ -72,8 +73,8 @@
 
 <div class="marquee-container gs-reveal-scroll">
     <div class="marquee-content">
-        AI FORMATTING ✦ STRUCTURAL INTEGRITY ✦ SYNTAX HIGHLIGHTING ✦ IDEMPOTENCY ✦ AI REFINEMENT ✦ AI FORMATTING ✦
-        STRUCTURAL INTEGRITY ✦ SYNTAX HIGHLIGHTING ✦ IDEMPOTENCY ✦ AI REFINEMENT ✦
+        AI FORMATTING ✦ NOTION SYNC ✦ SMART STRUCTURE ✦ CODE HIGHLIGHTING ✦ AI FORMATTING ✦ NOTION SYNC ✦ SMART
+        STRUCTURE ✦ CODE HIGHLIGHTING ✦
     </div>
 </div>
 
@@ -87,26 +88,23 @@
             <div
                 style="font-family: var(--font-display); font-size: 5rem; font-weight: 900; color: transparent; -webkit-text-stroke: 2px var(--ink-primary); margin-bottom: 1rem; line-height: 1;">
                 01</div>
-            <h3 style="margin-bottom: 1.5rem; font-size: 2.2rem;">PRETTIFY</h3>
-            <p>Automatically structure headers, lists, and paragraphs for maximum readability without destroying
-                original phrasing.</p>
+            <h3 style="margin-bottom: 1.5rem; font-size: 2.2rem;">CLEAN LAYOUT</h3>
+            <p>Automatically organize headers, lists, and paragraphs for perfect readability.</p>
         </div>
         <div class="block-card data-hover"
-            style="padding: 4rem 3rem; background: var(--ink-primary); color: var(--bg-primary); transform: translateY(-20px); border-style: dashed; border-color: var(--bg-primary);">
+            style="padding: 4rem 3rem; background: var(--ink-primary); color: var(--bg-primary); transform: translateY(-20px) skewY(-1.5deg);">
             <div
                 style="font-family: var(--font-display); font-size: 5rem; font-weight: 900; color: transparent; -webkit-text-stroke: 2px var(--bg-primary); margin-bottom: 1rem; line-height: 1;">
                 02</div>
-            <h3 style="margin-bottom: 1.5rem; font-size: 2.2rem; color: var(--bg-primary);">SYNTAX</h3>
-            <p style="color: rgba(245,246,247,0.8);">Detects code languages natively and applies proper Markdown syntax
-                blocks directly into Notion's native format.</p>
+            <h3 style="margin-bottom: 1.5rem; font-size: 2.2rem; color: var(--bg-primary);">CODE BLOCKS</h3>
+            <p style="color: rgba(245,246,247,0.8);">Automatically detect and format code snippets within your documents.</p>
         </div>
         <div class="block-card data-hover" style="padding: 4rem 3rem; border-style: dashed;">
             <div
                 style="font-family: var(--font-display); font-size: 5rem; font-weight: 900; color: transparent; -webkit-text-stroke: 2px var(--ink-primary); margin-bottom: 1rem; line-height: 1;">
                 03</div>
-            <h3 style="margin-bottom: 1.5rem; font-size: 2.2rem;">ASYNC</h3>
-            <p>Non-destructive idempotent rendering. Keeps your original ideas intact while elevating the structural
-                facade.</p>
+            <h3 style="margin-bottom: 1.5rem; font-size: 2.2rem;">SMART SYNC</h3>
+            <p>Reliable, non-destructive formatting that keeps your original content safe.</p>
         </div>
     </div>
 </div>
@@ -114,48 +112,73 @@
 <!-- Redesigned Creative CTA Section -->
 <div class="gs-reveal-scroll" style="margin-top: 15rem; margin-bottom: 15rem; perspective: 1000px;">
     <div class="cta-wrapper" style="position: relative; padding: 4rem 0;">
-        
+
         <!-- Background Architectural Layer (Skewed) -->
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-secondary); border: 2px solid var(--ink-primary); transform: skewY(-3deg); z-index: -1; box-shadow: 40px 40px 0px var(--ink-primary);"></div>
-        
+        <div
+            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-secondary); border: 2px solid var(--ink-primary); transform: skewY(-3deg); z-index: -1; box-shadow: 40px 40px 0px var(--ink-primary);">
+        </div>
+
         <!-- Top Layer: The Interactive Console -->
-        <div style="background: var(--ink-primary); color: var(--bg-primary); border: 1px solid var(--bg-primary); transform: rotate(1deg); transition: transform 0.5s ease; padding: 6rem 4rem; overflow: hidden; position: relative;" class="data-hover-cta">
-            
+        <div style="background: var(--ink-primary); color: var(--bg-primary); border: 1px solid var(--bg-primary); transform: rotate(1deg); transition: transform 0.5s ease; padding: 6rem 4rem; overflow: hidden; position: relative;"
+            class="data-hover-cta">
+
             <!-- Abstract Blueprint Overlay -->
             <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.1; pointer-events: none; background-image: 
                 radial-gradient(circle at 2px 2px, var(--bg-primary) 1px, transparent 0);
                 background-size: 40px 40px;"></div>
-            
-            <div style="position: relative; z-index: 10; display: flex; flex-direction: column; align-items: start; text-align: left; gap: 2rem;">
-                <div style="display: flex; align-items: center; gap: 1rem; font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.5em; text-transform: uppercase;">
-                    <span style="width: 12px; height: 12px; border-radius: 50%; background: #4caf50;"></span>
-                    UPLINK // ACTIVE // 2026
+
+            <div
+                style="position: relative; z-index: 10; display: flex; flex-direction: column; align-items: start; text-align: left; gap: 2rem;">
+                <div
+                    style="font-family: var(--font-mono); font-size: 0.75rem; letter-spacing: 0.5em; text-transform: uppercase;">
+                    PRODUCTION READY // 2026
                 </div>
-                
+
                 <h2 style="font-size: clamp(3rem, 12vw, 8rem); line-height: 0.8; letter-spacing: -0.08em; margin: 0;">
-                    BEYOND<br>
-                    <span style="color: transparent; -webkit-text-stroke: 2px var(--bg-primary); filter: drop-shadow(4px 4px 0px rgba(255,255,255,0.1));">LIMITS.</span>
+                    READY TO<br>
+                    <span
+                        style="color: transparent; -webkit-text-stroke: 2px var(--bg-primary); filter: drop-shadow(4px 4px 0px rgba(255,255,255,0.1));">FORMAT?</span>
                 </h2>
-                
-                <div style="width: 100%; max-width: 600px; height: 1px; background: rgba(245,246,247,0.3); margin: 2rem 0;"></div>
-                
-                <div style="display: flex; justify-content: space-between; width: 100%; align-items: flex-end; flex-wrap: wrap; gap: 4rem;">
-                    <p style="font-size: 1.25rem; font-weight: 500; max-width: 450px; color: rgba(245,246,247,0.8); line-height: 1.4;">
-                        Architectural structural integrity for your Notion universe. No compromises. Just pure syntax.
+
+                <div
+                    style="width: 100%; max-width: 600px; height: 1px; background: rgba(245,246,247,0.3); margin: 2rem 0;">
+                </div>
+
+                <div
+                    style="display: flex; justify-content: space-between; width: 100%; align-items: flex-end; flex-wrap: wrap; gap: 4rem;">
+                    <p
+                        style="font-size: 1.25rem; font-weight: 500; max-width: 450px; color: rgba(245,246,247,0.8); line-height: 1.4;">
+                        Beautiful, consistent layouts for your Notion pages. Fast, reliable, and perfectly formatted.
                     </p>
-                    
-                    <a href="/login" class="btn data-hover" style="background: var(--bg-primary); color: var(--ink-primary); padding: 2rem 5rem; font-size: 1.5rem; font-weight: 900; border: none; box-shadow: 15px 15px 0px #ffffff44; transition: all 0.3s ease;">
-                        START_SYNC
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" style="margin-left: 1rem;">
-                            <path d="M5 12h14M12 5l7 7-7 7"/>
+
+                    <a href="/login" class="btn data-hover" id="sync-btn"
+                        style="background: var(--bg-primary); color: var(--ink-primary); padding: 2rem 5rem; font-size: 1.5rem; font-weight: 900; border: none; box-shadow: 15px 15px 0px rgba(255,255,255,0.1); transition: all 0.3s ease;">
+                        Get Started
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="3" style="margin-left: 1rem;">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
                         </svg>
                     </a>
                 </div>
             </div>
 
+            <style>
+                #sync-btn:hover {
+                    background: #ffffff !important;
+                    color: #000000 !important;
+                    box-shadow: 5px 5px 0px var(--bg-tertiary) !important;
+                    transform: translate(-5px, -5px) !important;
+                }
+
+                #sync-btn::before {
+                    display: none !important;
+                }
+            </style>
+
             <!-- Redundant Decorative Text (Sideways) -->
-            <div style="position: absolute; right: -50px; top: 50%; transform: translateY(-50%) rotate(90deg); font-family: var(--font-mono); font-size: 1rem; opacity: 0.2; letter-spacing: 1em; white-space: nowrap; pointer-events: none;">
-                NOTION_ENVIRONMENT // FS_V2.0
+            <div
+                style="position: absolute; right: -50px; top: 50%; transform: translateY(-50%) rotate(90deg); font-family: var(--font-mono); font-size: 1rem; opacity: 0.2; letter-spacing: 1em; white-space: nowrap; pointer-events: none;">
+                FORMATTER ENGINE // V2.0
             </div>
         </div>
     </div>
@@ -166,17 +189,6 @@
         transform: rotate(0deg) scale(1.02) !important;
     }
 </style>
-
-<!-- Trust Bar Section -->
-<div class="gs-reveal-scroll" style="margin-top: 5rem; margin-bottom: 8rem; text-align: center; opacity: 0.4;">
-    <p style="font-family: var(--font-mono); font-size: 0.7rem; letter-spacing: 0.3em; text-transform: uppercase; margin-bottom: 3rem; color: var(--ink-muted);">Propelling Documentation At</p>
-    <div style="display: flex; gap: 5rem; justify-content: center; align-items: center; flex-wrap: wrap; filter: grayscale(1);">
-        <span style="font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; letter-spacing: -0.05em;">QUARK_LABS</span>
-        <span style="font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; letter-spacing: -0.05em;">SYNTH_CORP</span>
-        <span style="font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; letter-spacing: -0.05em;">AETHER_OS</span>
-        <span style="font-family: var(--font-display); font-weight: 800; font-size: 1.5rem; letter-spacing: -0.05em;">NEURAL_GRID</span>
-    </div>
-</div>
 
 <script>
     // Set up lenis smooth scroll listener for the specific anchor

@@ -2,26 +2,76 @@
 
 {% block content %}
 <div class="gs-reveal" style="flex: 1; margin-top: 2rem;">
-    <h2 style="margin-bottom: 4rem; font-size: clamp(3.5rem, 8vw, 7rem);">DOCUMENT<br>INDEX</h2>
-    
-    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; margin-bottom: 5rem;">
+    <h2 style="margin-bottom: 4rem; font-size: clamp(3.5rem, 8vw, 7rem);">MY<br>DOCUMENTS</h2>
+
+    <div
+        style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 2.5rem; margin-bottom: 5rem;">
         <div class="block-card data-hover" style="padding: 3rem;">
-            <div style="font-family: var(--font-mono); font-size: 1rem; color: var(--ink-muted); margin-bottom: 1rem; letter-spacing: 0.1em; font-weight: 700;">SYSTEM STATUS</div>
-            <div style="font-weight: 900; font-size: 1.75rem; display: flex; align-items: center; gap: 1rem; font-family: var(--font-display);">
-                <span style="display: inline-block; width: 14px; height: 14px; border-radius: 50%; background: #00e676; box-shadow: 0 0 15px #00e676; animation: pulse 2s infinite;"></span>
-                NOTION API // ONLINE
+            <div
+                style="font-family: var(--font-mono); font-size: 1rem; color: var(--ink-muted); margin-bottom: 1rem; letter-spacing: 0.1em; font-weight: 700;">
+                STATUS</div>
+            <div
+                style="font-weight: 900; font-size: 1.75rem; display: flex; align-items: center; gap: 1rem; font-family: var(--font-display);">
+                NOTION CONNECTED
             </div>
         </div>
-        <div class="block-card data-hover" style="padding: 3rem; background: var(--ink-primary); color: var(--bg-primary);">
-            <div style="font-family: var(--font-mono); font-size: 1rem; color: rgba(245,246,247,0.5); margin-bottom: 1rem; letter-spacing: 0.1em; font-weight: 700;">AVAILABLE TARGETS</div>
-            <div style="font-weight: 900; font-size: 1.75rem; font-family: var(--font-display); color: var(--bg-primary);">{{ pages|length }} DOCUMENTS DETECTED</div>
+        <div class="block-card data-hover"
+            style="padding: 3rem; background: var(--ink-primary); color: var(--bg-primary);">
+            <div
+                style="font-family: var(--font-mono); font-size: 1rem; color: rgba(245,246,247,0.5); margin-bottom: 1rem; letter-spacing: 0.1em; font-weight: 700;">
+                PAGES FOUND</div>
+            <div
+                style="font-weight: 900; font-size: 1.75rem; font-family: var(--font-display); color: var(--bg-primary);">
+                {{ pages|length }} DOCUMENTS DETECTED</div>
         </div>
     </div>
 
     <p style="margin-bottom: 3.5rem; max-width: 850px; font-size: 1.35rem; font-weight: 500; line-height: 1.6;">
-        To process a page, ensure it contains the raw markdown dump and select <strong style="font-family: var(--font-mono); background: var(--ink-muted); color: var(--bg-primary); padding: 0.2rem 0.6rem;">[ FORMAT ]</strong>. The engine will overwrite the structure seamlessly.
+        Select an existing page to format, or use the tools below to create something new.
     </p>
-    
+
+    <!-- Quick Actions Section -->
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 3rem; margin-bottom: 6rem;">
+        <!-- Create from Topic -->
+        <div class="block-card data-hover" style="padding: 3.5rem;">
+            <h3 style="margin-bottom: 1.5rem; font-size: 2rem;">START A NEW TOPIC</h3>
+            <p style="margin-bottom: 2.5rem; color: var(--ink-muted); font-size: 1.1rem;">
+                Enter a title and a brief prompt. We'll generate a structured Notion page for you.
+            </p>
+            <form action="/create_page" method="POST" onsubmit="startFormat(this)">
+                <input type="text" name="title" placeholder="Document Title (e.g. Project Specs)" required
+                    style="width: 100%; padding: 1.2rem; margin-bottom: 1.5rem; border: var(--border-weight) solid var(--border-color); background: transparent; font-family: inherit; font-size: 1rem;">
+                <textarea name="prompt" placeholder="What should this document be about?"
+                    style="width: 100%; padding: 1.2rem; margin-bottom: 2rem; border: var(--border-weight) solid var(--border-color); background: transparent; font-family: inherit; font-size: 1rem; min-height: 100px;"></textarea>
+                <button type="submit" class="btn btn-primary data-hover" style="width: 100%; padding: 1.5rem;">
+                    CREATE & FORMAT
+                </button>
+            </form>
+        </div>
+
+        <!-- Import File -->
+        <div class="block-card data-hover" style="padding: 3.5rem; border-style: dashed;">
+            <h3 style="margin-bottom: 1.5rem; font-size: 2rem;">IMPORT MARKDOWN</h3>
+            <p style="margin-bottom: 2.5rem; color: var(--ink-muted); font-size: 1.1rem;">
+                Upload a .md file. We'll convert it into a perfectly formatted Notion page.
+            </p>
+            <form action="/import_file" method="POST" enctype="multipart/form-data" onsubmit="startFormat(this)">
+                <input type="text" name="title" placeholder="Optional: Custom Title"
+                    style="width: 100%; padding: 1.2rem; margin-bottom: 1.5rem; border: var(--border-weight) solid var(--border-color); background: transparent; font-family: inherit; font-size: 1rem;">
+                <div style="position: relative; margin-bottom: 2rem;">
+                    <input type="file" name="file" accept=".md" required
+                        style="width: 100%; padding: 1.2rem; border: var(--border-weight) dashed var(--border-color); background: rgba(26,26,28,0.02); cursor: pointer;">
+                </div>
+                <button type="submit" class="btn data-hover" style="width: 100%; padding: 1.5rem; background: var(--ink-primary); color: var(--bg-primary);">
+                    UPLOAD & FORMAT
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <h3 style="margin-bottom: 2.5rem; font-size: 2.2rem; background: var(--ink-primary); color: var(--bg-primary); display: inline-block; padding: 0.5rem 2rem;">FORMAT EXISTING</h3>
+
+
     {% if pages %}
     <div class="block-card data-hover" style="padding: 0; overflow-x: auto; margin-bottom: 5rem;">
         <table class="data-table">
@@ -35,11 +85,16 @@
             <tbody>
                 {% for page in pages %}
                 <tr class="item-row data-hover">
-                    <td style="font-weight: 800; font-size: 1.35rem; font-family: var(--font-display); padding-left: 2.5rem;">{{ page.title }}</td>
-                    <td style="font-family: var(--font-mono); font-size: 1.1rem; color: var(--ink-muted);">{{ page.id[:12] }}...</td>
+                    <td
+                        style="font-weight: 800; font-size: 1.35rem; font-family: var(--font-display); padding-left: 2.5rem;">
+                        {{ page.title }}</td>
+                    <td style="font-family: var(--font-mono); font-size: 1.1rem; color: var(--ink-muted);">{{
+                        page.id[:12] }}...</td>
                     <td style="text-align: right; padding-right: 2.5rem;">
-                        <form action="/format/{{ page.id }}" method="POST" style="margin: 0; display: inline-block;" onsubmit="startFormat(this)">
-                            <button type="submit" class="btn btn-primary data-hover" style="padding: 1rem 2rem; font-size: 0.875rem;">INITIATE</button>
+                        <form action="/format/{{ page.id }}" method="POST" style="margin: 0; display: inline-block;"
+                            onsubmit="startFormat(this)">
+                            <button type="submit" class="btn btn-primary data-hover"
+                                style="padding: 1rem 2rem; font-size: 0.875rem;">FORMAT NOW</button>
                         </form>
                     </td>
                 </tr>
@@ -49,9 +104,10 @@
     </div>
     {% else %}
     <div class="block-card data-hover" style="text-align: center; padding: 10rem 2rem; margin-bottom: 5rem;">
-        <h3 style="margin-bottom: 1.5rem; font-size: 3rem;">NO DATA FOUND</h3>
-        <p style="margin: 0 auto; max-width: 450px; color: var(--ink-muted); font-size: 1.25rem;">Ensure documents are shared with the integration.</p>
-        <a href="https://www.notion.so/my-integrations" target="_blank" class="btn data-hover" style="margin-top: 4rem;">MANAGE PERMISSIONS</a>
+        <h3 style="margin-bottom: 1.5rem; font-size: 3rem;">NO PAGES FOUND</h3>
+        <p style="margin: 0 auto; max-width: 450px; color: var(--ink-muted); font-size: 1.25rem;">Make sure you've shared your Notion pages with this app.</p>
+        <a href="https://www.notion.so/my-integrations" target="_blank" class="btn data-hover"
+            style="margin-top: 4rem;">MANAGE PERMISSIONS</a>
     </div>
     {% endif %}
 </div>
@@ -60,25 +116,65 @@
 <div id="loadingOverlay" class="formatting-overlay">
     <div style="width: 100%; max-width: 1000px; padding: 3rem; position: relative; z-index: 10;">
         <h1 class="glitch-text" style="color: var(--bg-primary);">PROCESSING</h1>
-        <div style="border-top: var(--border-weight) solid var(--bg-primary); padding-top: 2rem; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 1.75rem; font-weight: 700;">
-            <span>INITIATING AI SEQUENCE</span>
+        <div
+            style="border-top: var(--border-weight) solid var(--bg-primary); padding-top: 2rem; display: flex; justify-content: space-between; font-family: var(--font-mono); font-size: 1.75rem; font-weight: 700;">
+            <span>FORMATTING YOUR DOCUMENT</span>
             <span class="loading-counter">00.00%</span>
         </div>
-        <div style="height: 6px; background: rgba(245,246,247,0.1); margin-top: 2.5rem; position: relative; overflow: hidden;">
-            <div class="progress-bar" style="position: absolute; top:0; left:0; height: 100%; width: 0%; background: var(--bg-primary); box-shadow: 0 0 30px rgba(245,246,247,1);"></div>
+        <div
+            style="height: 6px; background: rgba(245,246,247,0.1); margin-top: 2.5rem; position: relative; overflow: hidden;">
+            <div class="progress-bar"
+                style="position: absolute; top:0; left:0; height: 100%; width: 0%; background: var(--bg-primary); box-shadow: 0 0 30px rgba(245,246,247,1);">
+            </div>
         </div>
     </div>
 </div>
 
 <style>
-    @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(0,230,118,0.7); } 70% { box-shadow: 0 0 0 15px rgba(0,230,118,0); } 100% { box-shadow: 0 0 0 0 rgba(0,230,118,0); } }
+    @keyframes pulse {
+        0% {
+            box-shadow: 0 0 0 0 rgba(245, 246, 247, 0.2);
+        }
+
+        70% {
+            box-shadow: 0 0 0 15px rgba(245, 246, 247, 0);
+        }
+
+        100% {
+            box-shadow: 0 0 0 0 rgba(245, 246, 247, 0);
+        }
+    }
+
     @keyframes glitch-anim {
-      0% { text-shadow: -3px 0 red, 3px 0 cyan; transform: translate(3px, 0); }
-      10% { text-shadow: 3px 0 red, -3px 0 cyan; transform: translate(-3px, 0); }
-      20% { text-shadow: none; transform: translate(0, 0); }
-      30% { text-shadow: 3px 0 red, -3px 0 cyan; transform: translate(3px, 0); }
-      40% { text-shadow: none; transform: translate(0, 0); }
-      100% { text-shadow: none; transform: translate(0, 0); }
+        0% {
+            text-shadow: -3px 0 red, 3px 0 cyan;
+            transform: translate(3px, 0);
+        }
+
+        10% {
+            text-shadow: 3px 0 red, -3px 0 cyan;
+            transform: translate(-3px, 0);
+        }
+
+        20% {
+            text-shadow: none;
+            transform: translate(0, 0);
+        }
+
+        30% {
+            text-shadow: 3px 0 red, -3px 0 cyan;
+            transform: translate(3px, 0);
+        }
+
+        40% {
+            text-shadow: none;
+            transform: translate(0, 0);
+        }
+
+        100% {
+            text-shadow: none;
+            transform: translate(0, 0);
+        }
     }
 </style>
 
@@ -88,12 +184,12 @@
         const progressBar = overlay.querySelector('.progress-bar');
         const counter = overlay.querySelector('.loading-counter');
         const btn = form.querySelector('button');
-        
+
         btn.disabled = true;
         btn.innerText = 'WAIT';
-        
+
         overlay.classList.add('active');
-        
+
         // Hide custom cursor and pointer events behind
         document.body.style.pointerEvents = 'none';
         overlay.style.pointerEvents = 'auto';
@@ -106,10 +202,10 @@
             if (prog < 50) { speed = Math.random() * 2 + 1.5; }
             else if (prog < 80) { speed = Math.random() * 0.8 + 0.3; }
             else { speed = Math.random() * 0.2 + 0.05; }
-            
+
             prog += speed;
-            if(prog > 99.99) prog = 99.99; // hold until real server reload completes
-            
+            if (prog > 99.99) prog = 99.99; // hold until real server reload completes
+
             progressBar.style.width = prog + '%';
             counter.innerText = prog.toFixed(2).padStart(5, '0') + '%';
         }, 80);
