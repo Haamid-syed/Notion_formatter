@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>FORM // AI Notion Refiner</title>
-    
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/global.css') }}">
-    
+
     <!-- GSAP for advanced animations -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
@@ -22,27 +23,30 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.net.min.js"></script>
 </head>
+
 <body>
     <!-- Global Vanta Background -->
     <div id="vanta-bg" style="position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: -2;"></div>
     <div class="noise-overlay"></div>
     <div class="custom-cursor"></div>
-    
+
     <header class="navbar gs-reveal" id="main-nav">
         <a href="/" class="logo data-hover" style="gap: 0.75rem;">
-            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo" style="height: 36px; width: auto; max-width: 100%; border-radius: 6px;" />
-            Formatter
+            <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo"
+                style="height: 36px; width: auto; max-width: 100%; border-radius: 6px;" />
         </a>
-        
+
         <nav style="display: flex; gap: 2rem; align-items: center;">
-            <a href="/about" class="data-hover" style="text-decoration: none; color: var(--ink-primary); font-weight: 700; font-family: var(--font-mono); font-size: 0.875rem;">ABOUT</a>
-            <a href="/docs" class="data-hover" style="text-decoration: none; color: var(--ink-primary); font-weight: 700; font-family: var(--font-mono); font-size: 0.875rem;">DOCS</a>
-            
+            <a href="/about" class="data-hover"
+                style="text-decoration: none; color: var(--ink-primary); font-weight: 700; font-family: var(--font-mono); font-size: 0.875rem;">ABOUT</a>
+            <a href="/docs" class="data-hover"
+                style="text-decoration: none; color: var(--ink-primary); font-weight: 700; font-family: var(--font-mono); font-size: 0.875rem;">DOCS</a>
+
             <div class="nav-actions" style="margin-left: 1rem;">
                 {% if session.get('notion_access_token') %}
-                    <a href="/logout" class="btn nav-btn data-hover">DISCONNECT</a>
+                <a href="/logout" class="btn nav-btn data-hover">DISCONNECT</a>
                 {% else %}
-                    <a href="/login" class="btn btn-primary nav-btn data-hover">AUTHENTICATE</a>
+                <a href="/login" class="btn btn-primary nav-btn data-hover">AUTHENTICATE</a>
                 {% endif %}
             </div>
         </nav>
@@ -51,12 +55,13 @@
     <div class="app-container">
         <main style="flex: 1; display: flex; flex-direction: column;">
             {% if error %}
-            <div class="block-card gs-reveal" style="background: var(--ink-primary); color: var(--bg-primary); margin-bottom: 2rem;">
+            <div class="block-card gs-reveal"
+                style="background: var(--ink-primary); color: var(--bg-primary); margin-bottom: 2rem;">
                 <h3 style="margin-bottom: 0.5rem; color: #ff5252;">ERROR</h3>
                 <p style="font-family: var(--font-mono); font-size: 1rem;">{{ error }}</p>
             </div>
             {% endif %}
-            
+
             {% block content %}{% endblock %}
         </main>
     </div>
@@ -68,8 +73,14 @@
             <span>NOTION FORMATTER // V2.0</span>
         </div>
         <div style="display: flex; gap: 2rem;">
-            <a href="https://github.com" target="_blank" class="data-hover" style="text-decoration: none; border-bottom: 2px solid transparent; transition: border-color var(--transition-snap);" onmouseover="this.style.borderColor='var(--bg-primary)'" onmouseout="this.style.borderColor='transparent'">GITHUB</a>
-            <a href="https://x.com" target="_blank" class="data-hover" style="text-decoration: none; border-bottom: 2px solid transparent; transition: border-color var(--transition-snap);" onmouseover="this.style.borderColor='var(--bg-primary)'" onmouseout="this.style.borderColor='transparent'">X (TWITTER)</a>
+            <a href="https://github.com" target="_blank" class="data-hover"
+                style="text-decoration: none; border-bottom: 2px solid transparent; transition: border-color var(--transition-snap);"
+                onmouseover="this.style.borderColor='var(--bg-primary)'"
+                onmouseout="this.style.borderColor='transparent'">GITHUB</a>
+            <a href="https://x.com" target="_blank" class="data-hover"
+                style="text-decoration: none; border-bottom: 2px solid transparent; transition: border-color var(--transition-snap);"
+                onmouseover="this.style.borderColor='var(--bg-primary)'"
+                onmouseout="this.style.borderColor='transparent'">X (TWITTER)</a>
         </div>
     </footer>
 
@@ -78,7 +89,7 @@
         if ('scrollRestoration' in history) {
             history.scrollRestoration = 'manual';
         }
-        
+
         // Initialize GSAP & ScrollTrigger
         gsap.registerPlugin(ScrollTrigger);
 
@@ -97,13 +108,13 @@
 
         // Sync Lenis with GSAP
         lenis.on('scroll', ScrollTrigger.update);
-        gsap.ticker.add((time)=>{ lenis.raf(time * 1000) });
+        gsap.ticker.add((time) => { lenis.raf(time * 1000) });
         gsap.ticker.lagSmoothing(0);
 
         // Custom Cursor Logic
         const cursor = document.querySelector('.custom-cursor');
         const hoverElements = document.querySelectorAll('a, button, .btn, .data-hover');
-        
+
         if (window.matchMedia("(pointer: fine)").matches) {
             document.addEventListener('mousemove', (e) => {
                 cursor.style.transform = `translate3d(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%), 0)`;
@@ -131,8 +142,8 @@
         // Global GSAP Reveals
         document.addEventListener("DOMContentLoaded", () => {
             // Initial load animation for hero elements
-            gsap.fromTo(".gs-reveal", 
-                { y: 80, opacity: 0, scale: 0.98 }, 
+            gsap.fromTo(".gs-reveal",
+                { y: 80, opacity: 0, scale: 0.98 },
                 { y: 0, opacity: 1, scale: 1, duration: 1.2, stagger: 0.1, ease: "power4.out" }
             );
 
@@ -141,7 +152,7 @@
                 gsap.fromTo(elem,
                     { y: 60, opacity: 0 },
                     {
-                        y: 0, 
+                        y: 0,
                         opacity: 1,
                         duration: 1,
                         ease: "power3.out",
@@ -175,4 +186,5 @@
         }
     </script>
 </body>
+
 </html>
