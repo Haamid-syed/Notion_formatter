@@ -73,11 +73,11 @@
             <span>NOTION FORMATTER // V2.0</span>
         </div>
         <div style="display: flex; gap: 2rem;">
-            <a href="https://github.com" target="_blank" class="data-hover"
+            <a href="https://github.com/Haamid-Syed" target="_blank" class="data-hover"
                 style="text-decoration: none; border-bottom: 2px solid transparent; transition: border-color var(--transition-snap);"
                 onmouseover="this.style.borderColor='var(--bg-primary)'"
                 onmouseout="this.style.borderColor='transparent'">GITHUB</a>
-            <a href="https://x.com" target="_blank" class="data-hover"
+            <a href="https://x.com/Haamid_syedd" target="_blank" class="data-hover"
                 style="text-decoration: none; border-bottom: 2px solid transparent; transition: border-color var(--transition-snap);"
                 onmouseover="this.style.borderColor='var(--bg-primary)'"
                 onmouseout="this.style.borderColor='transparent'">X (TWITTER)</a>
@@ -113,7 +113,7 @@
 
         // Advanced Custom Cursor & Lens Effect Logic
         const cursor = document.querySelector('.custom-cursor');
-        
+
         if (window.matchMedia("(pointer: fine)").matches) {
             // Smooth mouse movement
             document.addEventListener('mousemove', (e) => {
@@ -126,7 +126,7 @@
             // More robust event delegation for 'bug-free' target detection
             document.addEventListener('mouseover', (e) => {
                 const target = e.target.closest('h1, h2, h3, h4, p, span, li, .btn, .data-hover, a');
-                
+
                 if (target) {
                     if (target.classList.contains('btn') || target.tagName === 'A' || target.closest('a')) {
                         cursor.classList.add('hovering');
