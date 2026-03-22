@@ -33,7 +33,7 @@
     <header class="navbar gs-reveal" id="main-nav">
         <a href="/" class="logo data-hover" style="gap: 0.75rem;">
             <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo"
-                style="height: 36px; width: auto; max-width: 100%; border-radius: 6px;" />
+                style="height: 56px; width: auto; max-width: 100%; border-radius: 6px;" />
         </a>
 
         <nav style="display: flex; gap: 2rem; align-items: center;">
@@ -111,18 +111,33 @@
         gsap.ticker.add((time) => { lenis.raf(time * 1000) });
         gsap.ticker.lagSmoothing(0);
 
-        // Custom Cursor Logic
+        // Advanced Custom Cursor & Lens Effect Logic
         const cursor = document.querySelector('.custom-cursor');
-        const hoverElements = document.querySelectorAll('a, button, .btn, .data-hover');
-
+        
         if (window.matchMedia("(pointer: fine)").matches) {
+            // Smooth mouse movement
             document.addEventListener('mousemove', (e) => {
-                cursor.style.transform = `translate3d(calc(${e.clientX}px - 50%), calc(${e.clientY}px - 50%), 0)`;
+                requestAnimationFrame(() => {
+                    cursor.style.left = `${e.clientX}px`;
+                    cursor.style.top = `${e.clientY}px`;
+                });
             });
 
-            hoverElements.forEach(el => {
-                el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
-                el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+            // More robust event delegation for 'bug-free' target detection
+            document.addEventListener('mouseover', (e) => {
+                const target = e.target.closest('h1, h2, h3, h4, p, span, li, .btn, .data-hover, a');
+                
+                if (target) {
+                    if (target.classList.contains('btn') || target.tagName === 'A' || target.closest('a')) {
+                        cursor.classList.add('hovering');
+                        cursor.classList.remove('lens-active');
+                    } else {
+                        cursor.classList.add('lens-active');
+                        cursor.classList.remove('hovering');
+                    }
+                } else {
+                    cursor.classList.remove('lens-active', 'hovering');
+                }
             });
         }
 
