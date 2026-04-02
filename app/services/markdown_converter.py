@@ -250,7 +250,7 @@ class MarkdownConverter:
             page_title = first_text.replace('!page', '', 1).strip()
             return {
                 'object': 'block', 'type': 'heading_3',
-                'heading_3': {'rich_text': self._split_text(f'\u21b3 Page Segment: {page_title}')},
+                'heading_3': {'rich_text': self._split_text(f'> Page Segment: {page_title}')},
             }
 
         # -------- regular blockquote --------
