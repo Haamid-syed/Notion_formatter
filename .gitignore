@@ -43,7 +43,7 @@ desktop.ini
 *.swp
 *.swo
 
-*.md
+PROJECT_CONTEXT.md
 
 # Project specific
 .planning/
