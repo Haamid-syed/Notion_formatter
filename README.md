@@ -1,9 +1,9 @@
-# Notion Formatter
+# Note Polish
 
 A professional tool that leverages AI to transform messy text and documents into structured, native Notion pages. 
 
 The application is live and accessible at: 
-[https://notion-formatter-haamids-projects.vercel.app/](https://notion-formatter-haamids-projects.vercel.app/)
+[https://notepolish.haamid.dev/](https://notepolish.haamid.dev/)
 
 ## How to Use
 
