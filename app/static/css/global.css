@@ -191,10 +191,6 @@ p {
   transition: transform 0.3s ease;
 }
 
-.navbar.scrolled-down {
-  /* Removed since navbar is no longer fixed */
-}
-
 @media (max-width: 768px) {
   .navbar {
     top: 1rem;
